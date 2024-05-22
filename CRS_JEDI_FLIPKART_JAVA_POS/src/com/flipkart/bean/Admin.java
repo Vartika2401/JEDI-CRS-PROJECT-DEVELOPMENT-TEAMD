@@ -1,42 +1,15 @@
 package com.flipkart.bean;
 
 
-public class Admin {
-	private String name;
-	private int adminID;
-	private String emailID;
+public class Admin extends User {
+    // Constructor
+	   public Admin(int id, String name, String phone, String email, String password, String role, String department) {
+	        super(id, name, phone, email, password, role);
+	   }
+    // Additional Admin-specific methods can be added here if needed
 
-
-	//    Constructor
-	public Admin(String name, int adminID, String emailID) {
-		this.name = name;
-		this.adminID = adminID;
-		this.emailID = emailID;
-	}
-	
-//	Getter and Setter
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAdminID() {
-		return adminID;
-	}
-
-	public void setAdminID(int adminID) {
-		this.adminID = adminID;
-	}
-
-	public String getEmailID() {
-		return emailID;
-	}
-
-	public void setEmailID(String emailID) {
-		this.emailID = emailID;
-	}
-
+    // Example method
+    public void manageSystem() {
+        System.out.println("Admin " + getName() + " is managing the system.");
+    }
 }
