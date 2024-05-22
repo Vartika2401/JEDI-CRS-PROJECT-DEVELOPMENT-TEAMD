@@ -1,12 +1,7 @@
 /**
  * 
  */
-package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
-import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSProfessorMenu;
-import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSStudentMenu;
-import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSAdminMenu;
-
-
+package com.flipkart.client;
 
 import java.util.Scanner;
 
@@ -35,16 +30,19 @@ public class CRSApplicationClient {
 				int role = scanner.nextInt();
 				switch (role) {
 					case 3:
-					CRSProfessorMenu professorMenu = new CRSProfessorMenu();
-					professorMenu.ProfessorMenu();
+						CRSProfessorMenu professorMenu = new CRSProfessorMenu();
+						professorMenu.ProfessorMenu();
+						break;
 					case 2:
 						CRSStudentMenu studentMenu = new CRSStudentMenu();
 						studentMenu.StudentMenu();
+						break;
 					case 1:
 						CRSAdminMenu adminMenu = new CRSAdminMenu();
 						adminMenu.AdminMenu();
-
-
+						break;
+					default:
+						System.out.println("Invalid input! Please Try Again");
 				}
 		}
 
