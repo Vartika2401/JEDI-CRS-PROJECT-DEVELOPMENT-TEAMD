@@ -3,8 +3,8 @@
  */
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSProfessorMenu;
-//import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSStudentMenu;
-//import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSAdminMenu;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSStudentMenu;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSAdminMenu;
 
 
 
@@ -37,12 +37,12 @@ public class CRSApplicationClient {
 					case 3:
 					CRSProfessorMenu professorMenu = new CRSProfessorMenu();
 					professorMenu.ProfessorMenu();
-//					case 2:
-//						CRSStudentMenu studentMenu = new CRSStudentMenu();
-//						studentMenu.StudentMenu();
-//					case 1:
-//						com.flipkart.client.CRSAdminMenu adminMenu = new CRSAdminMenu();
-//						adminMenu.adminMenu();
+					case 2:
+						CRSStudentMenu studentMenu = new CRSStudentMenu();
+						studentMenu.StudentMenu();
+					case 1:
+						CRSAdminMenu adminMenu = new CRSAdminMenu();
+						adminMenu.AdminMenu();
 
 
 				}

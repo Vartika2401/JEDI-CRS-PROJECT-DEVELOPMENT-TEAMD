@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.flipkart.client;
+package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
 
 import java.util.Scanner;
 
@@ -34,18 +34,19 @@ public class CRSStudentMenu {
 	                	System.out.println("1. Add Course");
 	    	            System.out.println("2. Remove Course");
 	    	            System.out.print("\nEnter your choice: ");
-//	    	            int coursech = scanner.nextInt();
-//	    	            if (coursech==1) {
-//	    	            	addCourse(StudentID);
-//	    	            }
-//	    	            else if (coursech==2) {
-//	    	            	removeCourse(StudentID);
-//	    	            }
-//	    	            else {
-//	    	            	System.out.println("Invalid Choice! Please try again.");
-//	    	            }
-//	    	            
-	                    break;
+	    	            int coursech = scanner.nextInt();
+						System.out.println("Enter Student ID: ");
+						int StudentID = scanner.nextInt();
+	    	            if (coursech==1) {
+	    	            	addCourse(StudentID);
+	    	            }
+	    	            else if (coursech==2) {
+	    	            	removeCourse(StudentID);
+	    	            }
+	    	            else {
+	    	            	System.out.println("Invalid Choice! Please try again.");
+	    	            }
+						break;
 	                case 3:
 	                    System.out.println("Grades (Not implemented yet)");
 	                    break;
@@ -55,12 +56,18 @@ public class CRSStudentMenu {
 	                case 5:
 	                    System.out.println("Logging Out...");
 	                    break;
-	                default:
-	                    System.out.println("Invalid Choice! Please try again.");
+
 	            }
 	        } while (choice != 5);
 	 
 	        scanner.close();
 	    }
+
+		public void addCourse(int studentID) {
+			System.out.println("Adding Course...");
+		}
+		public void removeCourse(int studentID) {
+			System.out.println("Removing Course...");
+		}
 
 }

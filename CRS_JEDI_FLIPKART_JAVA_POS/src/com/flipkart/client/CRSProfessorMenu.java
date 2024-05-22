@@ -36,8 +36,6 @@ public class CRSProfessorMenu {
 	                case 4:
 	                    System.out.println("Logging Out...");
 	                    break;
-	                default:
-	                    System.out.println("Invalid Choice! Please try again.");
 	            }
 	        } while (choice != 4);
 	 
