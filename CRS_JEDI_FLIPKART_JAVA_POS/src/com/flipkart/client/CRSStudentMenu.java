@@ -18,7 +18,7 @@ public class CRSStudentMenu {
 	        do {
 	            System.out.println("\nWelcome Student!\n");
 	            System.out.println("1. My Profile");
-	            System.out.println("2. Courses");
+	            System.out.println("2. Course Registration");
 	            System.out.println("3. Grades");
 	            System.out.println("4. Fees");
 	            System.out.println("5. Log Out");
@@ -31,7 +31,20 @@ public class CRSStudentMenu {
 	                    System.out.println("My Profile (Not implemented yet)");
 	                    break;
 	                case 2:
-	                    System.out.println("Courses (Not implemented yet)");
+	                	System.out.println("1. Add Course");
+	    	            System.out.println("2. Remove Course");
+	    	            System.out.print("\nEnter your choice: ");
+//	    	            int coursech = scanner.nextInt();
+//	    	            if (coursech==1) {
+//	    	            	addCourse(StudentID);
+//	    	            }
+//	    	            else if (coursech==2) {
+//	    	            	removeCourse(StudentID);
+//	    	            }
+//	    	            else {
+//	    	            	System.out.println("Invalid Choice! Please try again.");
+//	    	            }
+//	    	            
 	                    break;
 	                case 3:
 	                    System.out.println("Grades (Not implemented yet)");
