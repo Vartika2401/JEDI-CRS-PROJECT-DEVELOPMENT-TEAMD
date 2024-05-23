@@ -1,9 +1,5 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.bean;
 //package com.flipkart.bean;
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 import java.util.ArrayList;
 import java.util.List;
