@@ -14,10 +14,6 @@ public interface ProfessorInterface {
 
     public void showStudents(int profid) ;
 
-    public void uploadGrade(int courseId, int studentId, String grade) ;
-
-
-
-
+    public void addGrade(int profId, int courseId, int sem) ;
 	
 }

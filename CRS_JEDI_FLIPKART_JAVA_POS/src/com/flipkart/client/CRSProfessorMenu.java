@@ -24,29 +24,37 @@ public class CRSProfessorMenu {
 	            System.out.println("1. My Profile");
 	            System.out.println("2. Course Selection");
 	            System.out.println("3. View Students");
-	            System.out.println("4. Log Out");
+	            System.out.println("4. Submit Grades");
+				System.out.println("5. Log Out");
 	            System.out.print("\nEnter your choice: ");
 				ProfessorMethod professorMethod = new ProfessorMethod();
 	            choice = scanner.nextInt();
-	 
-	            switch (choice) {
+				int CourseID;
+				switch (choice) {
 	                case 1:
 	                    professorMethod.getProf(profID);
 	                    break;
 	                case 2:
 						List<Integer> courses = professorMethod.showFreeCourses();
 						System.out.println("\nEnter Course ID to teach: ");
-						int CourseID = scanner.nextInt();
+						CourseID = scanner.nextInt();
 						professorMethod.selectCourse(courses, profID, CourseID);
 	                    break;
 	                case 3:
 	                    professorMethod.showStudents(profID);
 	                    break;
-	                case 4:
+					case 4:
+						System.out.println("\nEnter Course ID to submit grades: ");
+						CourseID = scanner.nextInt();
+						System.out.println("\nEnter Semester: ");
+						int sem = scanner.nextInt();
+						professorMethod.addGrade(profID,CourseID,sem);
+						break;
+	                case 5:
 	                    System.out.println("Logging Out...");
 	                    break;
 	            }
-	        } while (choice != 4);
+	        } while (choice != 5);
 	 
 	        scanner.close();
 	    }

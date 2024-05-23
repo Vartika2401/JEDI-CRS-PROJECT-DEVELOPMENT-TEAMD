@@ -7,4 +7,5 @@ public interface professordaointerface {
     public List<Integer> showFreeCourses();
     public void selectCourse(List<Integer> courses, int profid, int courseid);
     public void showStudents(int profid);
+    public void addGrade(int profid, int courseid, int sem);
 }

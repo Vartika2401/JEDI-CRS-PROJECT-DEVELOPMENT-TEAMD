@@ -1,7 +1,6 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
 //package com.flipkart.business;
 
-
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.professordao;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.studentdao;
 
@@ -32,11 +31,10 @@ public class ProfessorMethod implements ProfessorInterface {
 		profesordao.showStudents(profid);
 	}
 
-	    public void uploadGrade(int courseId, int studentId, String grade) {
-	        System.out.println("Grade '" + grade + "' uploaded for student " + studentId + " in course " + courseId + ".");
-	    }
-
-
+	public void addGrade(int profid, int courseid, int sem) {
+		professordao profesordao = new professordao();
+		profesordao.addGrade(profid, courseid, sem);
+	}
 
 
 }

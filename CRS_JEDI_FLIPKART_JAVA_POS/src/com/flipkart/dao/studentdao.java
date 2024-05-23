@@ -166,10 +166,7 @@ public class studentdao implements studentdaointerface {
                     enrolled_courses.append(course).append(",");
                 }
             }
-//            print the updated list
-//            for (String course : enrolled_courses.toString().split(",")) {
-//                System.out.println(course);
-//            }
+
 
             String deletecourse = "UPDATE student SET enrolledcourses = ? WHERE studentid = ?";
             PreparedStatement pstmt = conn.prepareStatement(deletecourse);
