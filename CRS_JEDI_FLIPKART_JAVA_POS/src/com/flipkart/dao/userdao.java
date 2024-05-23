@@ -120,7 +120,7 @@ public class userdao implements userdaointerface {
                 rs1.next();
                 return rs1.getString("role");
             } else {
-                System.out.println("Invalid Student ID or Password");
+                System.out.println("Invalid ID or Password");
                 return "Invalid Student ID or Password";
             }
 

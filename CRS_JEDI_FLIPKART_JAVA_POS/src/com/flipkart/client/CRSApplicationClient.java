@@ -36,7 +36,7 @@ public class CRSApplicationClient {
 				String password = scanner.next();
 				studentregistration login = new studentregistration();
 				String role = login.login(ID, password);
-				System.out.println("Your role is " + role);
+//				System.out.println("Your role is " + role);
 				if (role.equals("student")) {
 					CRSStudentMenu studentMenu = new CRSStudentMenu();
 					studentMenu.StudentMenu(ID);
