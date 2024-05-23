@@ -12,10 +12,8 @@ public interface ProfessorInterface {
 
     public  void selectCourse(List<Integer> courses, int profid, int courseid);
 
-    public void uploadGrade(int courseId, int studentId, String grade) ;
+    public void showStudents(int profid) ;
 
-    public void viewEnrolledStudents(int courseId) ;
-
-
+    public void addGrade(int profId, int courseId, int sem) ;
 	
 }
