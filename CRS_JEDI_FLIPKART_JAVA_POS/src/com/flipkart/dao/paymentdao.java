@@ -9,7 +9,7 @@ public class paymentdao {
     Scanner scanner = new Scanner(System.in);
     static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
     static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    static final String PASS = "Fk!@#%213479";
     public Integer getfeeAmount(Integer semid){
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);

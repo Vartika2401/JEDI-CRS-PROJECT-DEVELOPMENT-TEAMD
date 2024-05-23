@@ -9,7 +9,7 @@ public class studentdao implements studentdaointerface {
     Scanner scanner = new Scanner(System.in);
     static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
     static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    static final String PASS = "Fk!@#%213479";
 
     public void getStudent(int studentid) {
         try {
@@ -115,6 +115,12 @@ public class studentdao implements studentdaointerface {
                 }
             }
             String cid = Integer.toString(courseid);
+
+            if (already_enrolled_courses.size()>=6){
+                System.out.println("Sorry can't enroll for more courses!");
+                return;
+            }
+
 
 //            print the already enrolled courses
             for (String[] course : already_enrolled_courses) {
