@@ -1,5 +1,9 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.bean;
+<<<<<<< Updated upstream
 //package com.flipkart.business;
+=======
+//package com.flipkart.bean;
+>>>>>>> Stashed changes
 
 
 public class StudentGrade {

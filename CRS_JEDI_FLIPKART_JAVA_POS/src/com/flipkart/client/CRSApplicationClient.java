@@ -1,7 +1,8 @@
 /**
  * 
  */
-package com.flipkart.client;
+package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
+//package com.flipkart.client;
 
 import java.util.Scanner;
 
@@ -51,3 +52,8 @@ public class CRSApplicationClient {
 	}
 
 }
+
+
+// notifications, registration,
+// serives :
+// payments
