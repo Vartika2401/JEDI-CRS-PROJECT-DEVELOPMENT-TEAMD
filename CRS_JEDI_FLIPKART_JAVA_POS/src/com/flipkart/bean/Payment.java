@@ -1,4 +1,5 @@
-package com.flipkart.bean;
+package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.bean;
+//package com.flipkart.bean;
 
 public class Payment {
     private int studentID;
