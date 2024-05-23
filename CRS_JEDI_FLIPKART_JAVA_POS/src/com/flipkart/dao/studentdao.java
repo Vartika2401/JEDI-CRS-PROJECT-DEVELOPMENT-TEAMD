@@ -61,6 +61,29 @@ public class studentdao implements studentdaointerface {
             throw new RuntimeException(e);
         }
     }
+    public List<Integer> showEnrolledCourses(int studentID) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//                select rows where studentid = studentid and user id = studentid
+//            take the courses where prof id is not null and get the prof name from prof table
+            String query= "SELECT enrolledcourses FROM student WHERE studentid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, studentID);
+            ResultSet rs = pstmt.executeQuery();
+//            initialize a list of courses
+            List<Integer> courses = new ArrayList<>();
+            while (rs.next()) {
+                System.out.print("Enrolled Courses: " + rs.getString("enrolledcourses"));
+                for (String course : rs.getString("enrolledcourses").split(",")) {
+                    courses.add(Integer.parseInt(course));
+                }
+            }
+            return courses;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void addCourse(List<Integer> courses, int studentid, int courseid) {
         try {
@@ -107,37 +130,40 @@ public class studentdao implements studentdaointerface {
                 pstmt3.executeUpdate();
                 System.out.println("Course added successfully!");
             }
-//            already_enrolled_courses.add(courseid);
-////            make this a
-//
-//            PreparedStatement pstmt = conn.prepareStatement(query);
-//            pstmt.setInt(1, studentid);
-//            pstmt.setInt(2, courseid);
-//            pstmt.executeUpdate();
-//            System.out.println("Course added successfully!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void addCourse(List<Integer> courses, int studentid) {
+    public void deleteCourse(List<Integer> courses, int studentid,int courseid) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//            check if course exists in the courses list
-            System.out.println("Enter Course ID: ");
-            int courseid = scanner.nextInt();
             if (!courses.contains(courseid)) {
-                System.out.println("Course does not exist!");
+                System.out.println("Course not found in available courses!");
                 return;
             }
-            String query = "INSERT INTO studentcourses (studentid,courseid) VALUES (?,?)";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            for (int i = 0; i < courses.size(); i++) {
-                pstmt.setInt(1, studentid);
-                pstmt.setInt(2, courses.get(i));
-                pstmt.executeUpdate();
+//            make a string of all the course ids
+            StringBuilder enrolled_courses = new StringBuilder();
+            System.out.println("Course id to remove: "+courseid);
+            for (int course : courses) {
+//                System.out.println(course);
+
+                if (course != courseid) {
+                    enrolled_courses.append(course).append(",");
+                }
             }
-            System.out.println("Courses added successfully!");
+//            print the updated list
+//            for (String course : enrolled_courses.toString().split(",")) {
+//                System.out.println(course);
+//            }
+
+            String deletecourse = "UPDATE student SET enrolledcourses = ? WHERE studentid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(deletecourse);
+            pstmt.setString(1, enrolled_courses.toString());
+            pstmt.setInt(2, studentid);
+            pstmt.executeUpdate();
+            System.out.println("Course removed successfully!");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

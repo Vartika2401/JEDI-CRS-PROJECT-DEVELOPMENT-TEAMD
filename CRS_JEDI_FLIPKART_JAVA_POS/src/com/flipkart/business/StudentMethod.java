@@ -20,6 +20,15 @@ public class StudentMethod implements StudentInterface {
         studentdao studentdao = new studentdao();
         studentdao.addCourse(courses, studentid, courseid);
     }
+    public List<Integer> showEnrolledCourses(int studentid){
+        studentdao studentdao = new studentdao();
+        return studentdao.showEnrolledCourses(studentid);
+    }
+
+    public void deletecourse(List<Integer> courses,int studentid,int courseid){
+        studentdao studentdao = new studentdao();
+        studentdao.deleteCourse(courses, studentid, courseid);
+    }
 
     public void viewGrade(int courseId, int studentId, String grade) {
         System.out.println("Grade " + grade + " for student " + studentId + " in course " + courseId + ".");

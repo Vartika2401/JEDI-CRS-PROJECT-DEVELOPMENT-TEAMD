@@ -7,5 +7,7 @@ public interface studentdaointerface {
         public void getStudent(int studentid);
         public List<Integer> showcourses();
         public void addCourse(List<Integer> courses, int studentid, int courseid);
+        public List<Integer> showEnrolledCourses(int studentid);
+        public void deleteCourse(List<Integer> courses,int studentid, int courseid);
 //        public void registercourse(int studentid);
 }

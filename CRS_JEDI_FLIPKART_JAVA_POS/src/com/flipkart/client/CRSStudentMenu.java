@@ -47,8 +47,17 @@ public class CRSStudentMenu {
 //	    	            	addCourse(courses, StudentID, CourseID);
 	    	            }
 	    	            else if (coursech==2) {
+							System.out.println("Already Enrolled Courses: ");
+							List<Integer> enrolledCourses = studentMethod.showEnrolledCourses(studentID);
+							System.out.println("Enter Course ID to remove: ");
+							int CourseID = scanner.nextInt();
+							if (enrolledCourses.contains(CourseID)) {
+								studentMethod.deletecourse(enrolledCourses, studentID, CourseID);
+							}
+							else {
+								System.out.println("Course not found in enrolled courses.");
+							}
 
-//	    	            	removeCourse(StudentID);
 	    	            }
 	    	            else {
 	    	            	System.out.println("Invalid Choice! Please try again.");
