@@ -9,12 +9,8 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
 //import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSAdminMenu;
 
 
+import java.sql.*;
 import java.util.Scanner;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * 
