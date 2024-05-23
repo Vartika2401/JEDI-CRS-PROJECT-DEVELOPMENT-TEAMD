@@ -3,9 +3,8 @@ package com.flipkart.business;
 public interface StudentInterface {
 	
 	public void getStudent();
-	public void uploadGrade(int courseId, int studentId, String grade);
-	public void viewEnrolledStudents(int courseId);
-	public void viewCourses();
-	public void profLogin(String emailId, String password);
+	public void viewGrade(int courseId, int studentId, String grade);
+	public void viewEnrolledCourses(int studentId);
+	public void studLogin(String emailId, String password);
 
 }

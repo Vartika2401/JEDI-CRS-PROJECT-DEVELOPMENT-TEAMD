@@ -8,8 +8,4 @@ public class Admin extends User {
 	   }
     // Additional Admin-specific methods can be added here if needed
 
-    // Example method
-    public void manageSystem() {
-        System.out.println("Admin " + getName() + " is managing the system.");
-    }
 }
