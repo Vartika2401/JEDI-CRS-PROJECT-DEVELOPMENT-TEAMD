@@ -103,8 +103,14 @@ public class studentdao implements studentdaointerface {
             PreparedStatement pstmt2 = conn.prepareStatement(query);
             pstmt2.setInt(1, studentid);
             ResultSet rs1 = pstmt2.executeQuery();
+            boolean flag=true;
             while (rs1.next()) {
-                for (String course : rs1.getString("enrolledcourses").split(",")) {
+                String res=rs1.getString("enrolledcourses");
+                if (rs1.wasNull()){
+                    res="";
+                    flag=false;
+                }
+                for (String course : res.split(",")) {
                     already_enrolled_courses.add(course.split(","));
                 }
             }
@@ -118,7 +124,13 @@ public class studentdao implements studentdaointerface {
                 return;
             }
             else{
-                already_enrolled_courses.add(new String[]{cid});
+                if (flag){
+                    already_enrolled_courses.add(new String[]{cid});
+                }
+                else{
+                    already_enrolled_courses.set(0, new String[]{cid});
+                }
+
 //                make this already enrolled query a string with ",'
                 StringBuilder enrolled_courses = new StringBuilder();
                 for (String[] course : already_enrolled_courses) {

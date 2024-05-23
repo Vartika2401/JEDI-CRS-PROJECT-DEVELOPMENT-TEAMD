@@ -68,28 +68,38 @@ public class professordao implements professordaointerface{
                 System.out.println("Course not free to select");
                 return;
             }
+
 //            make a set of courses and check if course exists in the set
             List<String[]> already_selected_courses = new ArrayList<>();
+
             String query = "SELECT selectedcourses FROM prof WHERE profid = ?";
             PreparedStatement pstmt2 = conn.prepareStatement(query);
             pstmt2.setInt(1, profid);
             ResultSet rs1 = pstmt2.executeQuery();
+            boolean flag=true;
             while (rs1.next()) {
-                for (String course : rs1.getString("selectedcourses").split(",")) {
+                String res=rs1.getString("selectedcourses");
+                if (rs1.wasNull()){
+                    res="";
+                    flag=false;
+                }
+                for (String course : res.split(",")) {
                     already_selected_courses.add(course.split(","));
                 }
             }
             String cid = Integer.toString(courseid);
-//            print the already enrolled courses
-//            for (String[] course : already_selected_courses) {
-//                System.out.println(course[0]);
-//            }
             if (already_selected_courses.contains(cid)) {
                 System.out.println("Course already selected!");
                 return;
             }
             else{
-                already_selected_courses.add(new String[]{cid});
+                if (flag){
+                    already_selected_courses.add(new String[]{cid});
+                }
+                else{
+                    already_selected_courses.set(0, new String[]{cid});
+                }
+
 
                 StringBuilder selected_courses = new StringBuilder();
                 for (String[] course : already_selected_courses) {
