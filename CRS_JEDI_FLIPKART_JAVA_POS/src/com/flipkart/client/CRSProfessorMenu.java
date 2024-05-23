@@ -23,7 +23,7 @@ public class CRSProfessorMenu {
 	            System.out.println("\nWelcome Professor!\n");
 	            System.out.println("1. My Profile");
 	            System.out.println("2. Course Selection");
-	            System.out.println("3. Students");
+	            System.out.println("3. View Students");
 	            System.out.println("4. Log Out");
 	            System.out.print("\nEnter your choice: ");
 				ProfessorMethod professorMethod = new ProfessorMethod();
@@ -38,10 +38,9 @@ public class CRSProfessorMenu {
 						System.out.println("\nEnter Course ID to teach: ");
 						int CourseID = scanner.nextInt();
 						professorMethod.selectCourse(courses, profID, CourseID);
-
 	                    break;
 	                case 3:
-	                    viewStudentOptions();
+	                    professorMethod.showStudents(profID);
 	                    break;
 	                case 4:
 	                    System.out.println("Logging Out...");
@@ -50,16 +49,6 @@ public class CRSProfessorMenu {
 	        } while (choice != 4);
 	 
 	        scanner.close();
-	    }
-	 
-	    public static void viewCourseOptions() {
-	        System.out.println("View Assigned Courses / Course Details (Not implemented yet)");
-	        
-	    }
-	 
-	    public static void viewStudentOptions() {
-	        System.out.println("View Enrolled Students / Upload Grades (Not implemented yet)");
-	        
 	    }
 
 }

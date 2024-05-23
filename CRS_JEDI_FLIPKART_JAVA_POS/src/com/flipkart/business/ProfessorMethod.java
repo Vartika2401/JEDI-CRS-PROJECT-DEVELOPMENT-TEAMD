@@ -27,13 +27,16 @@ public class ProfessorMethod implements ProfessorInterface {
 		profesordao.selectCourse(courses, profid, courseid);
 	}
 
+	public void showStudents(int profid) {
+		professordao profesordao = new professordao();
+		profesordao.showStudents(profid);
+	}
+
 	    public void uploadGrade(int courseId, int studentId, String grade) {
 	        System.out.println("Grade '" + grade + "' uploaded for student " + studentId + " in course " + courseId + ".");
 	    }
 
-	    public void viewEnrolledStudents(int courseId) {
-	        System.out.println("Viewing students enrolled in course " + courseId + ".");
-	    }
+
 
 
 }
