@@ -2,11 +2,17 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
 //package com.flipkart.business;
 
 
-public class ProfessorMethod {
-	
-	 public void getProf() {
-	        System.out.println("This is Prof object");
-	    }
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.professordao;
+
+
+public class ProfessorMethod implements ProfessorInterface {
+
+	@Override
+	public void getProf(int profid) {
+		professordao professordao = new professordao();
+		professordao.getProf(profid);
+
+	}
 
 	    public void uploadGrade(int courseId, int studentId, String grade) {
 	        System.out.println("Grade '" + grade + "' uploaded for student " + studentId + " in course " + courseId + ".");

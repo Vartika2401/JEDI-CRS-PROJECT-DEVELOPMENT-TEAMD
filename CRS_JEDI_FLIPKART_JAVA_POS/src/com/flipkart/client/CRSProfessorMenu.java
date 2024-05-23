@@ -4,6 +4,9 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
 //package com.flipkart.client;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business.ProfessorMethod;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business.StudentMethod;
+
 import java.util.Scanner;
 
 /**
@@ -11,7 +14,7 @@ import java.util.Scanner;
  */
 public class CRSProfessorMenu {
 	
-	    public void ProfessorMenu() {
+	    public void ProfessorMenu(int profID) {
 	        Scanner scanner = new Scanner(System.in);
 	        int choice;
 	 
@@ -22,12 +25,12 @@ public class CRSProfessorMenu {
 	            System.out.println("3. Students");
 	            System.out.println("4. Log Out");
 	            System.out.print("\nEnter your choice: ");
-	 
+				ProfessorMethod professorMethod = new ProfessorMethod();
 	            choice = scanner.nextInt();
 	 
 	            switch (choice) {
 	                case 1:
-	                    viewOrUpdateProfile();
+	                    professorMethod.getProf(profID);
 	                    break;
 	                case 2:
 	                    viewCourseOptions();
@@ -42,12 +45,6 @@ public class CRSProfessorMenu {
 	        } while (choice != 4);
 	 
 	        scanner.close();
-	    }
-	 
-	    // Placeholder methods 
-	    public static void viewOrUpdateProfile() {
-	        System.out.println("View/Update Profile (Not implemented yet)");
-	        
 	    }
 	 
 	    public static void viewCourseOptions() {

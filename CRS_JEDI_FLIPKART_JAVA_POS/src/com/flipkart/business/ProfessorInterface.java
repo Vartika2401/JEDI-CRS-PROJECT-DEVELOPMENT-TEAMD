@@ -4,7 +4,7 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
 
 public interface ProfessorInterface {
 	
-	public void getProf();
+	public void getProf(int profid);
 
     public void uploadGrade(int courseId, int studentId, String grade) ;
 

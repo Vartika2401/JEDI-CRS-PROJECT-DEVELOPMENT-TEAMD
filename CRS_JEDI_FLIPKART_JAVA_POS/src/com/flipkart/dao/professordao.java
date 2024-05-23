@@ -5,27 +5,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class studentdao implements studentdaointerface {
+public class professordao implements professordaointerface{
     Scanner scanner = new Scanner(System.in);
     static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
     static final String USER = "root";
     static final String PASS = "Fk!@#%213479";
 
-    public void getStudent(int studentid) {
+    public void getProf(int profid) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//                select rows where studentid = studentid and user id = studentid
-            String query = "SELECT * FROM student LEFT JOIN user ON student.studentid = user.id WHERE student.studentid = ?";
+//                select rows where profid = profid and user id = profid
+            String query = "SELECT * FROM prof LEFT JOIN user ON prof.profid = user.id WHERE prof.profid = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, studentid);
+            pstmt.setInt(1, profid);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                System.out.println("Student ID: " + rs.getInt("studentid"));
-                System.out.println("Student Name: " + rs.getString("name"));
-                System.out.println("Student Contact: " + rs.getString("contact"));
-                System.out.println("Student Email: " + rs.getString("email"));
-                System.out.println("Student Department: " + rs.getString("department"));
-                System.out.println("Student Courses: " + rs.getString("enrolledcourses"));
+                System.out.println("Professor ID: " + rs.getInt("profid"));
+                System.out.println("Professor Name: " + rs.getString("name"));
+                System.out.println("Professor Contact: " + rs.getString("contact"));
+                System.out.println("Professor Email: " + rs.getString("email"));
+                System.out.println("Professor Department: " + rs.getString("department"));
+                System.out.println("Professor Courses: " + rs.getString("selectedcourses"));
             }
 
 
@@ -168,5 +168,4 @@ public class studentdao implements studentdaointerface {
             throw new RuntimeException(e);
         }
     }
-
 }

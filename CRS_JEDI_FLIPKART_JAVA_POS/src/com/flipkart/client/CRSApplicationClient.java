@@ -4,14 +4,9 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
 //package com.flipkart.client;
 
-import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSProfessorMenu;
-import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSStudentMenu;
-import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSAdminMenu;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business.studentregistration;
 
 
-
-import java.sql.*;
 import java.util.Scanner;
 
 /**
@@ -35,19 +30,19 @@ public class CRSApplicationClient {
 		switch (choice) {
 			case 1:
 				System.out.println("Enter your credentials to login");
-				System.out.println("Enter your student ID: ");
-				Integer studentID = scanner.nextInt();
+				System.out.println("Enter your ID: ");
+				Integer ID = scanner.nextInt();
 				System.out.println("Enter your password: ");
 				String password = scanner.next();
 				studentregistration login = new studentregistration();
-				String role = login.login(studentID, password);
+				String role = login.login(ID, password);
 				System.out.println("Your role is " + role);
 				if (role.equals("student")) {
 					CRSStudentMenu studentMenu = new CRSStudentMenu();
-					studentMenu.StudentMenu(studentID);
-				} else if (role.equals("professor")) {
+					studentMenu.StudentMenu(ID);
+				} else if (role.equals("prof")) {
 					CRSProfessorMenu professorMenu = new CRSProfessorMenu();
-					professorMenu.ProfessorMenu();
+					professorMenu.ProfessorMenu(ID);
 				} else if (role.equals("admin")) {
 					CRSAdminMenu adminMenu = new CRSAdminMenu();
 					adminMenu.AdminMenu();
