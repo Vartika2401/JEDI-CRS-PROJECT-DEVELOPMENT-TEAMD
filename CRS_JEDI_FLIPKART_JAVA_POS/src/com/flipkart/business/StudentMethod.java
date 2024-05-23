@@ -1,9 +1,24 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.studentdao;
+
+import java.util.List;
 //package com.flipkart.business;
 
-public class StudentMethod {
-	public void getStudent() {
-        System.out.println("This is the student object");
+public class StudentMethod implements StudentInterface {
+
+    @Override
+    public void getStudent(int studentid) {
+        studentdao studentdao = new studentdao();
+        studentdao.getStudent(studentid);
+
+    }
+    public List<Integer> showcourses() {
+        studentdao studentdao = new studentdao();
+        return studentdao.showcourses();
+    }
+    public  void addcourse(List<Integer> courses, int studentid, int courseid){
+        studentdao studentdao = new studentdao();
+        studentdao.addCourse(courses, studentid, courseid);
     }
 
     public void viewGrade(int courseId, int studentId, String grade) {

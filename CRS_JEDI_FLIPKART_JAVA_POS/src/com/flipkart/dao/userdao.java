@@ -97,19 +97,16 @@ public class userdao implements userdaointerface {
 
     }
 
-    public String login() {
+    public  String login(int studentID, String password) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             Statement stmt = conn.createStatement();
-            System.out.println("Enter your Student ID");
-            Integer id = scanner.nextInt();
-            System.out.println("Enter your password");
-            String pass = scanner.next();
+            Integer id = studentID;
             String check_query = "SELECT * FROM user WHERE id = ? AND password = ?";
             PreparedStatement pstmt = conn.prepareStatement(check_query);
             pstmt.setInt(1, id);
-            pstmt.setString(2, pass);
+            pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 System.out.println("Login Successful");

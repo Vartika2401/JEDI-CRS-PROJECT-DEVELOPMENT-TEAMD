@@ -14,9 +14,9 @@ public class studentregistration  implements  studentregistratoninterface{
         userdao user = new userdao();
         user.changepassword();
     }
-    public String login() {
+    public String login(int studentID, String password) {
         // TODO Auto-generated method stub
         userdao user = new userdao();
-        return user.login();
+        return user.login(studentID, password);
     }
 }

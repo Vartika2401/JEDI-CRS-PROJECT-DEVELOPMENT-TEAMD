@@ -4,5 +4,5 @@ public interface studentregistratoninterface {
 
     public void registerstudent();
     public void changepassword();
-    public String login();
+    public String login(int studentID, String password);
 }

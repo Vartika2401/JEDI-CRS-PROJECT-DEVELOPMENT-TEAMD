@@ -34,12 +34,17 @@ public class CRSApplicationClient {
 		int choice = scanner.nextInt();
 		switch (choice) {
 			case 1:
+				System.out.println("Enter your credentials to login");
+				System.out.println("Enter your student ID: ");
+				Integer studentID = scanner.nextInt();
+				System.out.println("Enter your password: ");
+				String password = scanner.next();
 				studentregistration login = new studentregistration();
-				String role = login.login();
+				String role = login.login(studentID, password);
 				System.out.println("Your role is " + role);
 				if (role.equals("student")) {
 					CRSStudentMenu studentMenu = new CRSStudentMenu();
-					studentMenu.StudentMenu();
+					studentMenu.StudentMenu(studentID);
 				} else if (role.equals("professor")) {
 					CRSProfessorMenu professorMenu = new CRSProfessorMenu();
 					professorMenu.ProfessorMenu();
