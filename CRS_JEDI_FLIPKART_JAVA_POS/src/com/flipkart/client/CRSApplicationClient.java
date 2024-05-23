@@ -4,12 +4,26 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
 //package com.flipkart.client;
 
+//import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSProfessorMenu;
+//import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSStudentMenu;
+//import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client.CRSAdminMenu;
+
+
 import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * 
  */
 public class CRSApplicationClient {
+	static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
+	static final String USER = "root";
+	static final String PASS = "mahi_7781";
+	static final String QUERY = "SELECT * FROM student";
 
 	/**
 	 * @param args
@@ -44,6 +58,24 @@ public class CRSApplicationClient {
 						break;
 					default:
 						System.out.println("Invalid input! Please Try Again");
+				}
+			case 2:
+				try{
+					Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+					Statement stmt = conn.createStatement();
+					System.out.println("Hello");
+					ResultSet rs = stmt.executeQuery(QUERY);
+					// Extract data from result set
+					while (rs.next()) {
+						System.out.println("hell");
+						// Retrieve by column name
+						System.out.print("ID: " + rs.getInt("studentid"));
+						System.out.print(", Age: " + rs.getInt("department"));
+						System.out.print(", First: " + rs.getString("enrolledcourses"));
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 		}
 
