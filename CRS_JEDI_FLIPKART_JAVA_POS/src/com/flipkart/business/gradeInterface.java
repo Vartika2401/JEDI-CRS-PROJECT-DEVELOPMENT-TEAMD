@@ -1,17 +1,19 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
 //package com.flipkart.business;
 
+import java.util.List;
+
 public interface gradeInterface {
-    public String getCourseCod();
+//    public String getCourseCod();
+//
+//    public void setCourseCode(String courseCode);
+//
+//    public String getCourseName();
+//
+//    public void setCourseName(String courseName);
 
-    public void setCourseCode(String courseCode);
+    public List<Integer> getGrades(int studentID, List<Integer> courseids);
 
-    public String getCourseName();
-
-    public void setCourseName(String courseName);
-
-    public String getGrade();
-
-    public void setGrade(String grade);
+//    public void setGrade(String grade);
 
 }

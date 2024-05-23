@@ -6,6 +6,7 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.studentdaointerface;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business.StudentMethod;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business.paymentMethods;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business.gradeMethods;
 
 import java.util.List;
 import java.util.Scanner;
@@ -65,7 +66,18 @@ public class CRSStudentMenu {
 	    	            }
 						break;
 	                case 3:
-	                    System.out.println("Grades (Not implemented yet)");
+						List<Integer> courseids = studentMethod.showEnrolledCourses(studentID);
+						gradeMethods gradeMethods = new gradeMethods();
+						List<Integer> grades = gradeMethods.getGrades(studentID, courseids);
+						System.out.println("Your Grades are: ");
+						int sum = 0;
+						for (int i = 0; i < grades.size(); i++) {
+							System.out.println("Course ID: " + courseids.get(i) + " Grade: " + grades.get(i));
+							sum += grades.get(i);
+						}
+						System.out.println("SGPA :" + sum / grades.size());
+//						find the sum of grades
+
 	                    break;
 	                case 4:
 						System.out.println("Enter the semester number you want to pay fee for: ");
