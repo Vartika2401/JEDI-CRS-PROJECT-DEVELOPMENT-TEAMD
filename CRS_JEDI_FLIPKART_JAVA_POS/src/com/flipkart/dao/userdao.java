@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class userdao implements userdaointerface {
     static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
     static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    static final String PASS = "Fk!@#%213479";
     Scanner scanner = new Scanner(System.in);
 
     @Override
@@ -120,7 +120,7 @@ public class userdao implements userdaointerface {
                 rs1.next();
                 return rs1.getString("role");
             } else {
-                System.out.println("Invalid Student ID or Password");
+                System.out.println("Invalid ID or Password");
                 return "Invalid Student ID or Password";
             }
 

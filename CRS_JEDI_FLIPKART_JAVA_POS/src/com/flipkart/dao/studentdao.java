@@ -9,7 +9,7 @@ public class studentdao implements studentdaointerface {
     Scanner scanner = new Scanner(System.in);
     static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
     static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    static final String PASS = "Fk!@#%213479";
 
     public void getStudent(int studentid) {
         try {
@@ -25,7 +25,7 @@ public class studentdao implements studentdaointerface {
                 System.out.println("Student Contact: " + rs.getString("contact"));
                 System.out.println("Student Email: " + rs.getString("email"));
                 System.out.println("Student Department: " + rs.getString("department"));
-                System.out.println("Student Role: " + rs.getString("enrolledcourses"));
+                System.out.println("Student Courses: " + rs.getString("enrolledcourses"));
             }
 
 
@@ -61,6 +61,7 @@ public class studentdao implements studentdaointerface {
             throw new RuntimeException(e);
         }
     }
+
     public List<Integer> showEnrolledCourses(int studentID) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -102,8 +103,14 @@ public class studentdao implements studentdaointerface {
             PreparedStatement pstmt2 = conn.prepareStatement(query);
             pstmt2.setInt(1, studentid);
             ResultSet rs1 = pstmt2.executeQuery();
+            boolean flag=true;
             while (rs1.next()) {
-                for (String course : rs1.getString("enrolledcourses").split(",")) {
+                String res=rs1.getString("enrolledcourses");
+                if (rs1.wasNull()){
+                    res="";
+                    flag=false;
+                }
+                for (String course : res.split(",")) {
                     already_enrolled_courses.add(course.split(","));
                 }
             }
@@ -118,7 +125,13 @@ public class studentdao implements studentdaointerface {
                 return;
             }
             else{
-                already_enrolled_courses.add(new String[]{cid});
+                if (flag){
+                    already_enrolled_courses.add(new String[]{cid});
+                }
+                else{
+                    already_enrolled_courses.set(0, new String[]{cid});
+                }
+
 //                make this already enrolled query a string with ",'
                 StringBuilder enrolled_courses = new StringBuilder();
                 for (String[] course : already_enrolled_courses) {

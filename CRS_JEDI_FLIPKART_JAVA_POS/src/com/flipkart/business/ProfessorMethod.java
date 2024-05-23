@@ -2,11 +2,30 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
 //package com.flipkart.business;
 
 
-public class ProfessorMethod {
-	
-	 public void getProf() {
-	        System.out.println("This is Prof object");
-	    }
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.professordao;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.studentdao;
+
+import java.util.List;
+
+
+public class ProfessorMethod implements ProfessorInterface {
+
+	@Override
+	public void getProf(int profid) {
+		professordao professordao = new professordao();
+		professordao.getProf(profid);
+
+	}
+
+	public List<Integer> showFreeCourses() {
+		professordao professordao = new professordao();
+		return professordao.showFreeCourses();
+	}
+
+	public  void selectCourse(List<Integer> courses, int profid, int courseid){
+		professordao profesordao = new professordao();
+		profesordao.selectCourse(courses, profid, courseid);
+	}
 
 	    public void uploadGrade(int courseId, int studentId, String grade) {
 	        System.out.println("Grade '" + grade + "' uploaded for student " + studentId + " in course " + courseId + ".");
@@ -16,12 +35,5 @@ public class ProfessorMethod {
 	        System.out.println("Viewing students enrolled in course " + courseId + ".");
 	    }
 
-	    public void viewCourses() {
-	        System.out.println("Enroled Courses");
-	    }
-
-	    public void profLogin(String emailId, String password) {
-	        System.out.println("Professor with email '" + emailId + "' is attempting to log in.");
-	    }
 
 }
