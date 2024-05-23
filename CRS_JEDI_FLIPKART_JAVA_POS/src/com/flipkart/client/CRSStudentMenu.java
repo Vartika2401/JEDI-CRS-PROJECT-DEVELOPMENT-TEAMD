@@ -5,6 +5,7 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client;
 //package com.flipkart.client;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.studentdaointerface;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business.StudentMethod;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business.paymentMethods;
 
 import java.util.List;
 import java.util.Scanner;
@@ -67,7 +68,26 @@ public class CRSStudentMenu {
 	                    System.out.println("Grades (Not implemented yet)");
 	                    break;
 	                case 4:
-	                    System.out.println("Fees (Not implemented yet)");
+						System.out.println("Enter the semester number you want to pay fee for: ");
+						int semno = scanner.nextInt();
+	                    System.out.println("Fetching your fees amount...");
+						paymentMethods paymentMethods = new paymentMethods();
+						int feeamount = paymentMethods.feeamount(semno);
+						System.out.println("Your fee amount is: " + feeamount);
+						System.out.println("Choose the way to pay: ");
+						System.out.println("1. Online Payment");
+						System.out.println("2. Offline Payment");
+						int paymentChoice = scanner.nextInt();
+						if (paymentChoice == 1) {
+							paymentMethods.onlinepayment(feeamount, studentID, semno);
+
+						}
+						else if (paymentChoice == 2) {
+							paymentMethods.offlinepayment(feeamount,studentID,semno);
+						}
+						else {
+							System.out.println("Invalid Choice! Please try again.");
+						}
 	                    break;
 	                case 5:
 	                    System.out.println("Logging Out...");

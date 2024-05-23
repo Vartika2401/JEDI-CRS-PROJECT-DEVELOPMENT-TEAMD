@@ -1,37 +1,23 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.paymentdao;
 //package com.flipkart.business;
 
 
 public class paymentMethods {
-    private int studentID;
-    private int amount;
-    private String status;
-    public int getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
-    }
-
-    public int getAmount() {
+    public Integer feeamount(Integer semno){
+        paymentdao paymentdao = new paymentdao();
+        Integer amount = paymentdao.getfeeAmount(semno);
         return amount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void onlinepayment(int paymentamount, int studentid, int semno){
+        paymentdao paymentdao = new paymentdao();
+        paymentdao.onlinepayment(paymentamount, studentid, semno);
+
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void generateConfirmationStatus() {
-
-        System.out.println("Generating confirmation status for payment of amount: " + amount + " for student ID: " + studentID);
+    public void offlinepayment(int paymentamount, int studentid, int semno){
+        paymentdao paymentdao = new paymentdao();
+        paymentdao.offlinepayment(paymentamount,studentid,semno);
     }
 }

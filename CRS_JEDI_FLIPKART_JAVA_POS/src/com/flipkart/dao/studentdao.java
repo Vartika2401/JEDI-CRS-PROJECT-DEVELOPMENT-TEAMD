@@ -108,6 +108,7 @@ public class studentdao implements studentdaointerface {
                 }
             }
             String cid = Integer.toString(courseid);
+
 //            print the already enrolled courses
             for (String[] course : already_enrolled_courses) {
                 System.out.println(course[0]);
