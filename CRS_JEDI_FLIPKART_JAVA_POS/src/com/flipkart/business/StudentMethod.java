@@ -5,19 +5,16 @@ public class StudentMethod {
         System.out.println("This is the student object");
     }
 
-    public void uploadGrade(int courseId, int studentId, String grade) {
-        System.out.println("Grade '" + grade + "' uploaded for student " + studentId + " in course " + courseId + ".");
+    public void viewGrade(int courseId, int studentId, String grade) {
+        System.out.println("Grade " + grade + " for student " + studentId + " in course " + courseId + ".");
     }
 
-    public void viewEnrolledStudents(int courseId) {
-        System.out.println("Viewing students enrolled in course " + courseId + ".");
-    }
 
-    public void viewCourses() {
+    public void viewEnrolledCourses(int studentId) {
         System.out.println("The enrolled courses list");
     }
 
-    public void profLogin(String emailId, String password) {
-        System.out.println("Professor with email '" + emailId + "' is attempting to log in.");
+    public void studLogin(String emailId, String password) {
+        System.out.println("Student with email '" + emailId + "' is attempting to log in.");
     }
 }
