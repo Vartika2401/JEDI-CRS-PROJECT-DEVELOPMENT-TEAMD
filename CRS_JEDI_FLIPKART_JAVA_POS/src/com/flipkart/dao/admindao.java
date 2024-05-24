@@ -13,12 +13,27 @@ public class admindao implements admindaointerface {
     DBUtils db = new DBUtils();
     Connection conn = db.getConnection();
 
-<<<<<<< Updated upstream
-    public void  approveregistration(int studid){
+    public void  approveregistration(int studid,String pass){
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_USER);
+            pstmt.setInt(1,studid);
+            pstmt.setString(2,pass);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.APPROVE_REGISTRATION);
+                pstmt1.setInt(1,studid);
+                pstmt1.executeUpdate();
+                System.out.println("Student with ID: "+studid+" has been approved");
+            }
+            else{
+                System.out.println("Student with ID: "+studid+" not found");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
-=======
->>>>>>> Stashed changes
     public void approvecourses() {
         try {
 //            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";

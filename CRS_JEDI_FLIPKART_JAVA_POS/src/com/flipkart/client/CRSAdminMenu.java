@@ -27,24 +27,33 @@ public class CRSAdminMenu {
         do {
             System.out.println("\nWelcome Admin!\n");
             System.out.println("Choose your action:");
-            System.out.println("1. Approve Courses");
-            System.out.println("2. Add Courses To Catalog");
-            System.out.println("3. Remove Courses From Catalog");
-            System.out.println("4. Enable Add/Drop");
-            System.out.println("5. Disable Add/Drop");
-            System.out.println("6. Declare Result");
-            System.out.println("7. Stop Result");
+            System.out.println("1. Approve User Registration");
+            System.out.println("2. Approve Courses");
+            System.out.println("3. Add Courses To Catalog");
+            System.out.println("4. Remove Courses From Catalog");
+            System.out.println("5. Enable Add/Drop");
+            System.out.println("6. Disable Add/Drop");
+            System.out.println("7. Declare Result");
+            System.out.println("8. Stop Result");
 
-            System.out.println("8. Exit");
+            System.out.println("9. Exit");
             System.out.print("\nEnter your choice: ");
 
             choice = scanner.nextInt();
             AdminMethods adminMethods = new AdminMethods();
             switch (choice) {
                 case 1:
-                    adminMethods.approveCourses();
+                    System.out.println("Approving User Registration");
+                    System.out.println("Enter user ID to approve: ");
+                    int studentID = scanner.nextInt();
+                    System.out.println("Enter password: ");
+                    String password = scanner.next();
+                    adminMethods.approveregistration(studentID, password);
                     break;
                 case 2:
+                    adminMethods.approveCourses();
+                    break;
+                case 3:
                     System.out.println("Enter course details to add to catalog");
                     System.out.print("Enter course ID: ");
                     int courseid = scanner.nextInt();
@@ -56,7 +65,7 @@ public class CRSAdminMenu {
                     String coursedept = scanner.next();
                     adminMethods.addCoursesToCatalog(courseid, coursename, prereq, coursedept);
                     break;
-                case 3:
+                case 4:
                     System.out.println("How do you want to remove courses from catalog?");
                     System.out.println("1. By course ID");
                     System.out.println("2. By student count");
@@ -70,21 +79,21 @@ public class CRSAdminMenu {
                         adminMethods.removeCoursesFromCatalog_count();
                     }
                     break;
-                case 4:
+                case 5:
                     adminMethods.enableAddDrop();
                     break;
 //                    enableAddDrop();
-                case 5:
+                case 6:
                     adminMethods.disableAddDrop();
                     break;
-                case 6:
+                case 7:
                     adminMethods.declareResult();
                     break;
 //                    declareResult();
-                case 7:
+                case 8:
                     adminMethods.stopResult();
                     break;
-                case 8:
+                case 9:
                   System.out.println("Logging Out...");
                   System.out.println();
                   CRSApplicationClient crsApplicationClient = new CRSApplicationClient();

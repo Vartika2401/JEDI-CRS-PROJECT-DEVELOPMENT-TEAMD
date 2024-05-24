@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="output" path="CRS_JEDI_FLIPKART_JAVA_POS/src/com/flipkart/out/production/flipkart"/>
+</classpath>
