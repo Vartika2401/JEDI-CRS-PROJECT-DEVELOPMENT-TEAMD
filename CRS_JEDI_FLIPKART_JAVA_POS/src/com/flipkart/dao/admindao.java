@@ -57,16 +57,16 @@ public class admindao implements admindaointerface{
         try {
 //            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //            check if course already exists
-            String check_query = "SELECT * FROM courses WHERE courseid = ?";
-            PreparedStatement pstmt_check = conn.prepareStatement(check_query);
+//            String check_query = "SELECT * FROM courses WHERE courseid = ?";
+            PreparedStatement pstmt_check = conn.prepareStatement(SQLConstant.GET_COURSE_DETAILS);
             pstmt_check.setInt(1, courseid);
             ResultSet rs = pstmt_check.executeQuery();
             if (rs.next()) {
                 System.out.println("Course already exists in catalog");
                 return;
             }
-            String query = "INSERT INTO courses(courseid,coursename,prereq,coursedept,approvalstatus) VALUES(?,?,?,?,0)";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query = "INSERT INTO courses(courseid,coursename,prereq,coursedept,approvalstatus) VALUES(?,?,?,?,0)";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.ADD_COURSE);
             pstmt.setInt(1, courseid);
             pstmt.setString(2, coursename);
             pstmt.setString(3, prereq);
@@ -81,8 +81,8 @@ public class admindao implements admindaointerface{
         try {
 //            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //            check if course already exists
-            String check_query = "SELECT * FROM courses WHERE courseid = ?";
-            PreparedStatement pstmt_check = conn.prepareStatement(check_query);
+//            String check_query = "SELECT * FROM courses WHERE courseid = ?";
+            PreparedStatement pstmt_check = conn.prepareStatement(SQLConstant.GET_COURSE_DETAILS);
             pstmt_check.setInt(1, courseid);
             ResultSet rs = pstmt_check.executeQuery();
             if (rs.next()) {
@@ -101,8 +101,8 @@ public class admindao implements admindaointerface{
                         studentdao.deleteCourse(courses, student, courseid);
                     }
                 }
-                String query = "DELETE FROM courses WHERE courseid = ?";
-                PreparedStatement pstmt = conn.prepareStatement(query);
+//                String query = "DELETE FROM courses WHERE courseid = ?";
+                PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DELETE_COURSE);
                 pstmt.setInt(1, courseid);
                 pstmt.executeUpdate();
                 System.out.println("Course deleted from catalog");
@@ -119,10 +119,10 @@ public class admindao implements admindaointerface{
     public void delete_course_student_count_wrong() {
         try {
 //            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
+//            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
 //            drop course from student table
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(course_id);
+            ResultSet rs = stmt.executeQuery(SQLConstant.GET_ENROLLED_STUDENTS);
             while (rs.next()) {
                 List<Integer> enrolledstudents = new ArrayList<>();
                 int courseid = rs.getInt("courseid");
@@ -136,8 +136,8 @@ public class admindao implements admindaointerface{
                 }}
                 catch (Exception e){
                     System.out.println("Course with ID: " + courseid + " has been deleted");
-                    String query = "DELETE FROM courses WHERE courseid = ?";
-                    PreparedStatement pstmt = conn.prepareStatement(query);
+//                    String query = "DELETE FROM courses WHERE courseid = ?";
+                    PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DELETE_COURSE);
                     pstmt.setInt(1, courseid);
                     pstmt.executeUpdate();
                     System.out.println("Course deleted from catalog");
@@ -158,8 +158,8 @@ public class admindao implements admindaointerface{
                         System.out.println("Course ID: " + courseid);
                         System.out.println("Enrolled Students: " + enrolledstudents);
                     }
-                String query = "DELETE FROM courses WHERE courseid = ?";
-                PreparedStatement pstmt = conn.prepareStatement(query);
+//                String query = "DELETE FROM courses WHERE courseid = ?";
+                PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DELETE_COURSE);
                 pstmt.setInt(1, courseid);
                 pstmt.executeUpdate();
                 System.out.println("Course deleted from catalog");

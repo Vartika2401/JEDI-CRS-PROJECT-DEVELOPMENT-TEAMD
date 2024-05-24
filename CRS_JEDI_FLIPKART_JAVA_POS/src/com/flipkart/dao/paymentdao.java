@@ -1,5 +1,6 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
 
 import java.sql.*;
@@ -14,8 +15,8 @@ public class paymentdao {
     public Integer getfeeAmount(Integer semid){
         try {
 //                select rows where studentid = studentid and user id = studentid
-            String query = "SELECT * from fees_requirement WHERE semno=?";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query = "SELECT * from fees_requirement WHERE semno=?";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_FEES);
             pstmt.setInt(1, semid);
             ResultSet rs = pstmt.executeQuery();
             Integer amount = 0;
@@ -31,8 +32,8 @@ public class paymentdao {
     public void onlinepayment(Integer amount,Integer studentid, Integer semno){
         try {
 //                select rows where studentid = studentid and user id = studentid
-            String query = "INSERT INTO payments(studentid,semno,paymentamount,paymentmode) VALUES(?,?,?,'online')";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query = "INSERT INTO payments(studentid,semno,paymentamount,paymentmode) VALUES(?,?,?,'online')";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.INSERT_PAYMENT_ONLINE);
             pstmt.setInt(1, studentid);
             pstmt.setInt(2, semno);
             pstmt.setInt(3, amount);
@@ -44,8 +45,8 @@ public class paymentdao {
     }
     public void offlinepayment(Integer amount,Integer studentid, Integer semno) {
         try {
-            String query = "INSERT INTO payments(studentid,semno,paymentamount,paymentmode) VALUES(?,?,?,'offline')";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query = "INSERT INTO payments(studentid,semno,paymentamount,paymentmode) VALUES(?,?,?,'offline')";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.INSERT_PAYMENT_OFFLINE);
             pstmt.setInt(1, studentid);
             pstmt.setInt(2, semno);
             pstmt.setInt(3, amount);

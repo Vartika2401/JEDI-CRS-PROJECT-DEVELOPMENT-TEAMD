@@ -1,5 +1,6 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
 
 import java.sql.*;
@@ -14,8 +15,8 @@ public class gradedao {
 //            select all the rows where studennt id = student id and course id = course id
             List<Integer> grades = new ArrayList<>();
             for (int courseid : courseids) {
-                String query = "SELECT * from grades WHERE studentid=? and courseid=?";
-                PreparedStatement pstmt = conn.prepareStatement(query);
+//                String query = "SELECT * from grades WHERE studentid=? and courseid=?";
+                PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_STUDENT_GRADES);
                 pstmt.setInt(1, studentID);
                 pstmt.setInt(2, courseid);
                 ResultSet rs = pstmt.executeQuery();

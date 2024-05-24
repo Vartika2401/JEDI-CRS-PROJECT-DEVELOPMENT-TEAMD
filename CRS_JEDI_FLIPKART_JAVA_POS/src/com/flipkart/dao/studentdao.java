@@ -1,5 +1,6 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
 
 import java.sql.*;
@@ -15,8 +16,8 @@ public class studentdao implements studentdaointerface {
     public void getStudent(int studentid) {
         try {
 //                select rows where studentid = studentid and user id = studentid
-            String query = "SELECT * FROM student LEFT JOIN user ON student.studentid = user.id WHERE student.studentid = ?";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query = "SELECT * FROM student LEFT JOIN user ON student.studentid = user.id WHERE student.studentid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_STUDENT);
             pstmt.setInt(1, studentid);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -38,8 +39,8 @@ public class studentdao implements studentdaointerface {
         try {
 //                select rows where studentid = studentid and user id = studentid
 //            take the courses where prof id is not null and get the prof name from prof table
-            String query = "SELECT profid,courseid,coursename,prereq,coursedept FROM prof LEFT JOIN courses ON courses.c_profid = prof.profid WHERE courses.c_profid IS NOT NULL";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query = "SELECT profid,courseid,coursename,prereq,coursedept FROM prof LEFT JOIN courses ON courses.c_profid = prof.profid WHERE courses.c_profid IS NOT NULL";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.SHOW_COURSES);
             ResultSet rs = pstmt.executeQuery();
 //            initialize a list of courses
             List<Integer> courses = new ArrayList<>();
@@ -65,8 +66,8 @@ public class studentdao implements studentdaointerface {
         try {
 //                select rows where studentid = studentid and user id = studentid
 //            take the courses where prof id is not null and get the prof name from prof table
-            String query= "SELECT enrolledcourses FROM student WHERE studentid = ?";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query= "SELECT enrolledcourses FROM student WHERE studentid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.SHOW_ENROLLED_COURSES);
             pstmt.setInt(1, studentID);
             ResultSet rs = pstmt.executeQuery();
 //            initialize a list of courses
@@ -85,8 +86,8 @@ public class studentdao implements studentdaointerface {
 
     public void addCourse(List<Integer> courses, int studentid, int courseid) {
         try {
-            String check_if_course_exists = "SELECT * FROM courses WHERE courseid = ?";
-            PreparedStatement pstmt1 = conn.prepareStatement(check_if_course_exists);
+//            String check_if_course_exists = "SELECT * FROM courses WHERE courseid = ?";
+            PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.GET_COURSE_DETAILS);
             pstmt1.setInt(1, courseid);
             ResultSet rs = pstmt1.executeQuery();
             if (!rs.next()) {
@@ -95,8 +96,8 @@ public class studentdao implements studentdaointerface {
             }
 //            make a set of courses and check if course exists in the set
             List<String[]> already_enrolled_courses = new ArrayList<>();
-            String query = "SELECT enrolledcourses FROM student WHERE studentid = ?";
-            PreparedStatement pstmt2 = conn.prepareStatement(query);
+//            String query = "SELECT enrolledcourses FROM student WHERE studentid = ?";
+            PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.SHOW_ENROLLED_COURSES);
             pstmt2.setInt(1, studentid);
             ResultSet rs1 = pstmt2.executeQuery();
             boolean flag=true;
@@ -136,8 +137,8 @@ public class studentdao implements studentdaointerface {
                 for (String[] course : already_enrolled_courses) {
                     enrolled_courses.append(course[0]).append(",");
                 }
-                String update_query = "UPDATE student SET enrolledcourses = ? WHERE studentid = ?";
-                PreparedStatement pstmt3 = conn.prepareStatement(update_query);
+//                String update_query = "UPDATE student SET enrolledcourses = ? WHERE studentid = ?";
+                PreparedStatement pstmt3 = conn.prepareStatement(SQLConstant.UPDATE_ENROLLED_COURSES);
                 pstmt3.setString(1, enrolled_courses.toString());
                 pstmt3.setInt(2, studentid);
                 pstmt3.executeUpdate();
@@ -167,8 +168,8 @@ public class studentdao implements studentdaointerface {
             }
 
 
-            String deletecourse = "UPDATE student SET enrolledcourses = ? WHERE studentid = ?";
-            PreparedStatement pstmt = conn.prepareStatement(deletecourse);
+//            String deletecourse = "UPDATE student SET enrolledcourses = ? WHERE studentid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.UPDATE_ENROLLED_COURSES);
             pstmt.setString(1, enrolled_courses.toString());
             pstmt.setInt(2, studentid);
             pstmt.executeUpdate();
@@ -181,8 +182,8 @@ public class studentdao implements studentdaointerface {
     }
     public void addCoursetocoursecatalog(int studentid, int courseid) {
         try {
-            String check_if_course_exists = "SELECT * FROM courses WHERE courseid = ?";
-            PreparedStatement pstmt1 = conn.prepareStatement(check_if_course_exists);
+//            String check_if_course_exists = "SELECT * FROM courses WHERE courseid = ?";
+            PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.GET_COURSE_DETAILS);
             pstmt1.setInt(1, courseid);
             ResultSet rs = pstmt1.executeQuery();
             if (!rs.next()) {
@@ -197,8 +198,8 @@ public class studentdao implements studentdaointerface {
                 add_student1.append(add_student).append(",").append(studentid);
             }
             System.out.println(add_student1);
-            String update_query = "UPDATE courses SET enrolledstud = ? WHERE courseid = ?";
-            PreparedStatement pstmt3 = conn.prepareStatement(update_query);
+//            String update_query = "UPDATE courses SET enrolledstud = ? WHERE courseid = ?";
+            PreparedStatement pstmt3 = conn.prepareStatement(SQLConstant.UPDATE_COURSE_SET);
             pstmt3.setString(1, add_student1.toString());
             pstmt3.setInt(2, courseid);
             pstmt3.executeUpdate();

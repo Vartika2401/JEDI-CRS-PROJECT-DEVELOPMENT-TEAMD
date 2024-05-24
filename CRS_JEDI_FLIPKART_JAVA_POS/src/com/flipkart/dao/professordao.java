@@ -1,5 +1,6 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
 
 import java.sql.*;
@@ -15,8 +16,8 @@ public class professordao implements professordaointerface{
     public void getProf(int profid) {
         try {
 //                select rows where profid = profid and user id = profid
-            String query = "SELECT * FROM prof LEFT JOIN user ON prof.profid = user.id WHERE prof.profid = ?";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query = "SELECT * FROM prof LEFT JOIN user ON prof.profid = user.id WHERE prof.profid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_PROF);
             pstmt.setInt(1, profid);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -37,8 +38,8 @@ public class professordao implements professordaointerface{
     public List<Integer> showFreeCourses() {
         try {
 //            take the courses where prof id is null
-            String query = "SELECT courseid,coursename,prereq,coursedept FROM courses WHERE courses.c_profid IS NULL";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//           String query = "SELECT courseid,coursename,prereq,coursedept FROM courses WHERE courses.c_profid IS NULL";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.SHOW_FREE_COURSES);
             ResultSet rs = pstmt.executeQuery();
 //            initialize a list of courses
             List<Integer> courses = new ArrayList<>();
@@ -70,8 +71,8 @@ public class professordao implements professordaointerface{
 //            make a set of courses and check if course exists in the set
             List<String[]> already_selected_courses = new ArrayList<>();
 
-            String query = "SELECT selectedcourses FROM prof WHERE profid = ?";
-            PreparedStatement pstmt2 = conn.prepareStatement(query);
+//            String query = "SELECT selectedcourses FROM prof WHERE profid = ?";
+            PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.SELECT_COURSE);
             pstmt2.setInt(1, profid);
             ResultSet rs1 = pstmt2.executeQuery();
             boolean flag=true;
@@ -104,14 +105,14 @@ public class professordao implements professordaointerface{
                     selected_courses.append(course[0]).append(",");
                 }
 
-                String update_query = "UPDATE prof SET selectedcourses = ? WHERE profid = ?";
-                PreparedStatement pstmt3 = conn.prepareStatement(update_query);
+//                String update_query = "UPDATE prof SET selectedcourses = ? WHERE profid = ?";
+                PreparedStatement pstmt3 = conn.prepareStatement(SQLConstant.UPDATE_PROF_COURSE);
                 pstmt3.setString(1, selected_courses.toString());
                 pstmt3.setInt(2, profid);
                 pstmt3.executeUpdate();
 
-                String update_query_course = "UPDATE courses SET c_profid = ? WHERE courseid = ?";
-                PreparedStatement pstmt4 = conn.prepareStatement(update_query_course);
+//                String update_query_course = "UPDATE courses SET c_profid = ? WHERE courseid = ?";
+                PreparedStatement pstmt4 = conn.prepareStatement(SQLConstant.UPDATE_CPROF);
                 pstmt4.setInt(1, profid);
                 pstmt4.setInt(2, courseid);
                 pstmt4.executeUpdate();
@@ -126,8 +127,8 @@ public class professordao implements professordaointerface{
     public void showStudents(int profid){
         try {
 
-            String query = "SELECT courseid FROM courses WHERE courses.c_profid = ?";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query = "SELECT courseid FROM courses WHERE courses.c_profid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_COURSE_ID_FROM_PROF);
             pstmt.setInt(1,profid);
             ResultSet rs = pstmt.executeQuery();
 
@@ -142,8 +143,8 @@ public class professordao implements professordaointerface{
             else{
                 for (int cid : courses){
                     System.out.println("Students for course ID "+cid+" :-");
-                    String query2 = "SELECT enrolledstud FROM courses WHERE courses.courseid = ?";
-                    PreparedStatement pstmt2 = conn.prepareStatement(query2);
+//                    String query2 = "SELECT enrolledstud FROM courses WHERE courses.courseid = ?";
+                    PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.ENROLLED_STUDENTS_IN_A_COURSE);
                     pstmt2.setInt(1,cid);
                     ResultSet rs2 = pstmt2.executeQuery();
 
@@ -158,8 +159,8 @@ public class professordao implements professordaointerface{
                         }
                         for (String id_string : res.split(",")) {
                             int studid = Integer.parseInt(id_string);
-                            String query3 = "SELECT id,name,department FROM user LEFT JOIN student ON user.id=student.studentid WHERE user.id = ?";
-                            PreparedStatement pstmt3 = conn.prepareStatement(query3);
+//                            String query3 = "SELECT id,name,department FROM user LEFT JOIN student ON user.id=student.studentid WHERE user.id = ?";
+                            PreparedStatement pstmt3 = conn.prepareStatement(SQLConstant.GET_ID_NAME);
                             pstmt3.setInt(1,studid);
                             ResultSet rs3 = pstmt3.executeQuery();
                             while (rs3.next()) {
@@ -182,8 +183,8 @@ public class professordao implements professordaointerface{
     public void addGrade(int profid, int courseid, int sem) {
         try {
 
-            String query = "SELECT COUNT(*) FROM courses WHERE courses.courseid=? and courses.c_profid = ?";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+//            String query = "SELECT COUNT(*) FROM courses WHERE courses.courseid=? and courses.c_profid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_COURSE_COUNT);
             pstmt.setInt(1,courseid);
             pstmt.setInt(2,profid);
             ResultSet rs = pstmt.executeQuery();
@@ -197,8 +198,8 @@ public class professordao implements professordaointerface{
             }
 
             else{
-                String query2 = "SELECT enrolledstud FROM courses WHERE courses.courseid= ? and courses.c_profid = ?";
-                PreparedStatement pstmt2 = conn.prepareStatement(query2);
+//                String query2 = "SELECT enrolledstud FROM courses WHERE courses.courseid= ? and courses.c_profid = ?";
+                PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.ENROLLED_STUDENTS_BY_PROF);
                 pstmt2.setInt(1,courseid);
                 pstmt2.setInt(2,profid);
                 ResultSet rs2 = pstmt2.executeQuery();
