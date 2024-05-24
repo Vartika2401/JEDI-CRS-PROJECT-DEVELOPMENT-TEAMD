@@ -149,6 +149,8 @@ public class professordao implements professordaointerface{
             else{
                 for (int cid : courses){
                     System.out.println("Students for course ID "+cid+" :-");
+                    System.out.println();
+                    System.out.printf("%10s %20s %20s", "Student ID", "Name", "Department");
 //                    String query2 = "SELECT enrolledstud FROM courses WHERE courses.courseid = ?";
                     PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.ENROLLED_STUDENTS_IN_A_COURSE);
                     pstmt2.setInt(1,cid);
@@ -163,6 +165,7 @@ public class professordao implements professordaointerface{
                             System.out.println("    No students enrolled yet for this course");
                             break;
                         }
+                        System.out.println();
                         for (String id_string : res.split(",")) {
                             int studid = Integer.parseInt(id_string);
 //                            String query3 = "SELECT id,name,department FROM user LEFT JOIN student ON user.id=student.studentid WHERE user.id = ?";
@@ -177,16 +180,15 @@ public class professordao implements professordaointerface{
                                 student.add(rs3.getString("department"));
                                 studentList.add(student);
                             }
-                            System.out.printf("%10s %20s %20s", "Student ID", "Name", "Department");
-                            System.out.println();
+
+
                             for (ArrayList<String> student : studentList) {
                                 System.out.printf("%10s %20s %20s", student.get(0), student.get(1), student.get(2));
-                                System.out.println();
                             }
                             System.out.println();
                         }
                     }
-
+                    System.out.println();
                 }
             }
         } catch (SQLException e) {
