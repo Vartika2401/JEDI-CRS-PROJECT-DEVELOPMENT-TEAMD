@@ -1,5 +1,7 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +13,9 @@ public class admindao implements admindaointerface{
     public void approvecourses() {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
+//            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(course_id);
+            ResultSet rs = stmt.executeQuery(SQLConstant.GET_COURSE_APPROVAL);
             while (rs.next()) {
                 List<Integer> enrolledstudents = new ArrayList<>();
                 int courseid = rs.getInt("courseid");
@@ -26,16 +28,23 @@ public class admindao implements admindaointerface{
                 System.out.println("Course ID: " + courseid);
                 System.out.println("Enrolled Students: " + enrolledstudents);
                 if (enrolledstudents.size() >= 3 && enrolledstudents.size() <= 10) {
-                    String update_query = "UPDATE courses SET approvalstatus = 1 WHERE courseid = ?";
-                    PreparedStatement pstmt = conn.prepareStatement(update_query);
+                    PreparedStatement pstmt = conn.prepareStatement(SQLConstant.UPDATE_APPROVAL_STATUS);
                     pstmt.setInt(1, courseid);
                     pstmt.executeUpdate();
                     System.out.println("Course with ID: " + courseid + " has been approved");
                 } else {
                     if (enrolledstudents.size() < 3) {
                         System.out.println("Course with ID: " + courseid + " has less than 3 students");
+//                        remove this course from student's catalog
+                        studentdao studentdao = new studentdao();
+
                     } else {
                         System.out.println("Course with ID: " + courseid + " has more than 10 students");
+                    }
+                    studentdao studentdao = new studentdao();
+                    for (int student : enrolledstudents) {
+                        List<Integer> courses = studentdao.showEnrolledCourses(student);
+                        studentdao.deleteCourse(courses, student, courseid);
                     }
                 }
             }
