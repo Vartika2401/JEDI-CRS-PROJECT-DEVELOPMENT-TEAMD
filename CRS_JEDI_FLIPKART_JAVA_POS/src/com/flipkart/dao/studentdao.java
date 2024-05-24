@@ -9,7 +9,7 @@ public class studentdao implements studentdaointerface {
     Scanner scanner = new Scanner(System.in);
     static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
     static final String USER = "root";
-    static final String PASS = "Fk!@#%213479";
+    static final String PASS = "mahi_7781";
 
     public void getStudent(int studentid) {
         try {
@@ -74,7 +74,6 @@ public class studentdao implements studentdaointerface {
 //            initialize a list of courses
             List<Integer> courses = new ArrayList<>();
             while (rs.next()) {
-                System.out.print("Enrolled Courses: " + rs.getString("enrolledcourses"));
                 for (String course : rs.getString("enrolledcourses").split(",")) {
                     courses.add(Integer.parseInt(course));
                 }
@@ -164,7 +163,6 @@ public class studentdao implements studentdaointerface {
             }
 //            make a string of all the course ids
             StringBuilder enrolled_courses = new StringBuilder();
-            System.out.println("Course id to remove: "+courseid);
             for (int course : courses) {
 //                System.out.println(course);
 

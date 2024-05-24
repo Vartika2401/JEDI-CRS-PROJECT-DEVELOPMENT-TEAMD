@@ -51,6 +51,7 @@ public class CRSStudentMenu {
 	    	            else if (coursech==2) {
 							System.out.println("Already Enrolled Courses: ");
 							List<Integer> enrolledCourses = studentMethod.showEnrolledCourses(studentID);
+							System.out.println(enrolledCourses);
 							System.out.println("Enter Course ID to remove: ");
 							int CourseID = scanner.nextInt();
 							if (enrolledCourses.contains(CourseID)) {

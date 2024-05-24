@@ -9,7 +9,7 @@ public class professordao implements professordaointerface{
     Scanner scanner = new Scanner(System.in);
     static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
     static final String USER = "root";
-    static final String PASS = "Fk!@#%213479";
+    static final String PASS = "mahi_7781";
 
     public void getProf(int profid) {
         try {

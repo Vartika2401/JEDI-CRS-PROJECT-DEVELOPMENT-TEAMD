@@ -7,7 +7,7 @@ import java.util.List;
 public class gradedao {
     static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
     static final String USER = "root";
-    static final String PASS = "Fk!@#%213479";
+    static final String PASS = "mahi_7781";
     public List<Integer> getGrades(int studentID, List<Integer> courseids) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);

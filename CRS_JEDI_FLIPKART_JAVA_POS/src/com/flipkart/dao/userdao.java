@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class userdao implements userdaointerface {
     static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
     static final String USER = "root";
-    static final String PASS = "Fk!@#%213479";
+    static final String PASS = "mahi_7781";
     Scanner scanner = new Scanner(System.in);
 
     @Override
