@@ -109,13 +109,13 @@ public class userdao implements userdaointerface {
             if (rs.next()) {
                 System.out.println("Login Successful");
 //                String role_query = "SELECT * FROM user_roles WHERE userid = ?";
-                PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.GET_USER_ROLE);
+                PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.GET_USER_ROLE_NAME);
                 pstmt1.setInt(1, id);
-                if (pstmt1.execute()) {
-                    System.out.println("Role fetched");
-                }
+                System.out.println();
                 ResultSet rs1 = pstmt1.executeQuery();
                 rs1.next();
+                String name= rs1.getString("name");
+                System.out.println("Welcome "+name);
                 return rs1.getString("role");
             } else {
                 System.out.println("Invalid ID or Password");
