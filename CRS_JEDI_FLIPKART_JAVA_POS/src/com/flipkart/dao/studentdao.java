@@ -109,9 +109,11 @@ public class studentdao implements studentdaointerface {
                     res="";
                     flag=false;
                 }
-                for (String course : res.split(",")) {
-                    already_enrolled_courses.add(course.split(","));
+                List<String> courses1 = List.of(res.split(","));
+                for (String course : courses1) {
+                    already_enrolled_courses.add(new String[]{course});
                 }
+
             }
             String cid = Integer.toString(courseid);
 
@@ -119,17 +121,12 @@ public class studentdao implements studentdaointerface {
                 System.out.println("Sorry can't enroll for more courses!");
                 return;
             }
-
-
-//            print the already enrolled courses
             for (String[] course : already_enrolled_courses) {
-                System.out.println(course[0]);
+                if (course[0].equals(cid)){
+                    System.out.println("Course already enrolled!");
+                    return;
+                }
             }
-            if (already_enrolled_courses.contains(cid)) {
-                System.out.println("Course already enrolled!");
-                return;
-            }
-            else{
                 if (flag){
                     already_enrolled_courses.add(new String[]{cid});
                 }
@@ -147,8 +144,10 @@ public class studentdao implements studentdaointerface {
                 pstmt3.setString(1, enrolled_courses.toString());
                 pstmt3.setInt(2, studentid);
                 pstmt3.executeUpdate();
+                addCoursetocoursecatalog(studentid, courseid);
                 System.out.println("Course added successfully!");
-            }
+
+//            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -179,9 +178,40 @@ public class studentdao implements studentdaointerface {
             pstmt.executeUpdate();
             System.out.println("Course removed successfully!");
 
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void addCoursetocoursecatalog(int studentid, int courseid) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            String check_if_course_exists = "SELECT * FROM courses WHERE courseid = ?";
+            PreparedStatement pstmt1 = conn.prepareStatement(check_if_course_exists);
+            pstmt1.setInt(1, courseid);
+            ResultSet rs = pstmt1.executeQuery();
+            if (!rs.next()) {
+                System.out.println("Course does not exist!");
+                return;
+            }
+            String add_student = rs.getString("enrolledstud");
+            StringBuilder add_student1 = new StringBuilder();
+            if (add_student == null) {
+                add_student1.append(studentid);
+            } else {
+                add_student1.append(add_student).append(",").append(studentid);
+            }
+            System.out.println(add_student1);
+            String update_query = "UPDATE courses SET enrolledstud = ? WHERE courseid = ?";
+            PreparedStatement pstmt3 = conn.prepareStatement(update_query);
+            pstmt3.setString(1, add_student1.toString());
+            pstmt3.setInt(2, courseid);
+            pstmt3.executeUpdate();
+            System.out.println("Student added to enrolled students!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-}
+
+    }
