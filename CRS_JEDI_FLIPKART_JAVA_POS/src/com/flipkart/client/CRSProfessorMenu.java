@@ -36,6 +36,10 @@ public class CRSProfessorMenu {
 	                    break;
 	                case 2:
 						List<Integer> courses = professorMethod.showFreeCourses();
+						if (courses.size()==0){
+							System.out.println("No courses available to be selected");
+							break;
+						}
 						System.out.println("\nEnter Course ID to teach: ");
 						CourseID = scanner.nextInt();
 						professorMethod.selectCourse(courses, profID, CourseID);

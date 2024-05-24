@@ -19,7 +19,7 @@ public class SQLConstant {
     public static final String ENROLLED_STUDENTS_IN_A_COURSE = "SELECT enrolledstud FROM courses WHERE courses.courseid = ?";
     public static final String GET_ID_NAME = "SELECT id,name,department FROM user LEFT JOIN student ON user.id=student.studentid WHERE user.id = ?";
     public static final String GET_COURSE_COUNT = "SELECT COUNT(*) FROM courses WHERE courses.courseid=? and courses.c_profid = ?";
-    public static final String ENROLLED_STUDENTS_BY_PROF = "SELECT COUNT(*) FROM courses WHERE courses.courseid=? and courses.c_profid = ?";
+    public static final String ENROLLED_STUDENTS_BY_PROF = "SELECT enrolledstud FROM courses WHERE courses.courseid= ? and courses.c_profid = ?";
     public static final String GET_STUDENT = "SELECT * FROM student LEFT JOIN user ON student.studentid = user.id WHERE student.studentid = ?";
     public static final String SHOW_COURSES = "SELECT profid,courseid,coursename,prereq,coursedept FROM prof LEFT JOIN courses ON courses.c_profid = prof.profid WHERE courses.c_profid IS NOT NULL";
     public static final String SHOW_ENROLLED_COURSES = "SELECT enrolledcourses FROM student WHERE studentid = ?";

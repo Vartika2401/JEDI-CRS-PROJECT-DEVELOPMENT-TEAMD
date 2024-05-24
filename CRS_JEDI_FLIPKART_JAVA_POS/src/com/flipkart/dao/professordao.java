@@ -230,6 +230,7 @@ public class professordao implements professordaointerface{
                         pstmt3.executeUpdate();
                     }
                     System.out.println();
+                    System.out.println("Grades submitted successfully");
                 }
 
             }
