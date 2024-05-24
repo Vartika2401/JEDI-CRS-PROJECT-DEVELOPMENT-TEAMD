@@ -76,7 +76,7 @@ public class CRSApplicationClient {
 						CRSAdminMenu adminMenu = new CRSAdminMenu();
 						adminMenu.AdminMenu();
 					}
-					break;
+					return;
 				case 2:
 					studentregistration register = new studentregistration();
 					register.registerstudent();

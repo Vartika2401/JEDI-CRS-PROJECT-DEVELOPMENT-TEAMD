@@ -35,7 +35,6 @@ public class CRSAdminMenu {
             System.out.println("6. Disable Add/Drop");
             System.out.println("7. Declare Result");
             System.out.println("8. Stop Result");
-
             System.out.println("9. Exit");
             System.out.print("\nEnter your choice: ");
 
@@ -46,7 +45,7 @@ public class CRSAdminMenu {
                     System.out.println("Approving User Registration");
                     System.out.println("Enter user ID to approve: ");
                     int studentID = scanner.nextInt();
-                    System.out.println("Enter password: ");
+                    System.out.println("Enter user password: ");
                     String password = scanner.next();
                     adminMethods.approveregistration(studentID, password);
                     break;
@@ -104,7 +103,7 @@ public class CRSAdminMenu {
                     System.out.println();
                     break;
             }
-        } while (choice != 6);
+        } while (choice != 9);
 
         scanner.close();
     }

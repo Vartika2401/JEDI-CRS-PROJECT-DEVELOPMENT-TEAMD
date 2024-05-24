@@ -40,5 +40,6 @@ public class SQLConstant {
     public static final String DECLARE_RESULT = "UPDATE courses SET declare = 1";
     public static final String STOP_RESULT = "UPDATE courses SET declare = 0";
     public static final String GET_USER = "SELECT * FROM user WHERE id = ? and password = ?";
+    public static final String CHECK_USER = "SELECT approval FROM user WHERE id = ?";
     public static final String APPROVE_REGISTRATION = "UPDATE user SET approval = 1 WHERE id = ?";
 }

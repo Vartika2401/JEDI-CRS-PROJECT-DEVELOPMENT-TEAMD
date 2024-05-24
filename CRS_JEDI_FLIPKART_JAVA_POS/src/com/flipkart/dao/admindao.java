@@ -15,6 +15,16 @@ public class admindao implements admindaointerface {
 
     public void  approveregistration(int studid,String pass){
         try{
+            PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.CHECK_USER);
+            pstmt2.setInt(1,studid);
+            ResultSet rs2 = pstmt2.executeQuery();
+            if (rs2.next()){
+                int check = rs2.getInt("approval");
+                if (check==1){
+                    System.out.println("Student already approved");
+                    return;
+                }
+            }
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_USER);
             pstmt.setInt(1,studid);
             pstmt.setString(2,pass);
