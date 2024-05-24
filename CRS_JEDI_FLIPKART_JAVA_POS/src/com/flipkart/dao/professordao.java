@@ -1,6 +1,7 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
+
 /**
- * @author Group-D
+ * Author: Group-D
  * Vartika
  * Rohan Mitra
  * Rishabh Verma
@@ -9,6 +10,7 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
  * Asritha Dama
  * Prajwal Rayal
  **/
+
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.validator.AdminValidator;
@@ -19,12 +21,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class professordao implements professordaointerface{
+public class professordao implements professordaointerface {
     Scanner scanner = new Scanner(System.in);
     DBUtils db = new DBUtils();
     Connection conn = db.getConnection();
     ProfValidator profValidator = new ProfValidator();
 
+    /**
+     * Retrieves the details of a professor based on their ID.
+     * @param profid The ID of the professor
+     */
     public void getProf(int profid) {
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_PROF);
@@ -38,18 +44,19 @@ public class professordao implements professordaointerface{
                 System.out.println("Professor Department: " + rs.getString("department"));
                 System.out.println("Professor Courses: " + rs.getString("selectedcourses"));
             }
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Shows the list of courses that are available for selection.
+     * @return A list of available course IDs
+     */
     public List<Integer> showFreeCourses() {
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.SHOW_FREE_COURSES);
             ResultSet rs = pstmt.executeQuery();
-//            initialize a list of courses
             List<Integer> courses = new ArrayList<>();
             List<ArrayList> courseList = new ArrayList<>();
             while (rs.next()) {
@@ -68,38 +75,35 @@ public class professordao implements professordaointerface{
                 System.out.println();
             }
             return courses;
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-
+    /**
+     * Selects a course for the professor.
+     * @param courses The list of courses to be selected
+     * @param profid The ID of the professor
+     * @param courseid The ID of the course to be selected
+     */
     public void selectCourse(List<Integer> courses, int profid, int courseid) {
         try {
-
-//            if (!courses.contains(courseid)) {
-//                System.out.println("Course not free to select");
-//                return;
-//            }
             if (!profValidator.coursehasnoprof(courseid)) {
                 System.out.println("Course not free to select");
                 return;
             }
 
-//            make a set of courses and check if course exists in the set
             List<String[]> already_selected_courses = new ArrayList<>();
 
             PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.SELECT_COURSE);
             pstmt2.setInt(1, profid);
             ResultSet rs1 = pstmt2.executeQuery();
-            boolean flag=true;
+            boolean flag = true;
             while (rs1.next()) {
-                String res=rs1.getString("selectedcourses");
-                if (rs1.wasNull()){
-                    res="";
-                    flag=false;
+                String res = rs1.getString("selectedcourses");
+                if (rs1.wasNull()) {
+                    res = "";
+                    flag = false;
                 }
                 for (String course : res.split(",")) {
                     already_selected_courses.add(course.split(","));
@@ -109,15 +113,12 @@ public class professordao implements professordaointerface{
             if (already_selected_courses.contains(cid)) {
                 System.out.println("Course already selected!");
                 return;
-            }
-            else{
-                if (flag){
+            } else {
+                if (flag) {
                     already_selected_courses.add(new String[]{cid});
-                }
-                else{
+                } else {
                     already_selected_courses.set(0, new String[]{cid});
                 }
-
 
                 StringBuilder selected_courses = new StringBuilder();
                 for (String[] course : already_selected_courses) {
@@ -141,38 +142,36 @@ public class professordao implements professordaointerface{
         }
     }
 
-    public void showStudents(int profid){
+    /**
+     * Shows the students enrolled in the courses taught by the professor.
+     * @param profid The ID of the professor
+     */
+    public void showStudents(int profid) {
         try {
-
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_COURSE_ID_FROM_PROF);
-            pstmt.setInt(1,profid);
+            pstmt.setInt(1, profid);
             ResultSet rs = pstmt.executeQuery();
 
-//            initialize a list of courses
             List<Integer> courses = new ArrayList<>();
             while (rs.next()) {
                 courses.add(rs.getInt("courseid"));
             }
 
-            if (profValidator.nocourse(courses)){
+            if (profValidator.nocourse(courses)) {
                 System.out.println("No courses assigned to this professor!");
-            }
-            else{
-                for (int cid : courses){
-                    System.out.println("Students for course ID "+cid+" :-");
+            } else {
+                for (int cid : courses) {
+                    System.out.println("Students for course ID " + cid + " :-");
                     System.out.println();
                     System.out.printf("%10s %20s %20s", "Student ID", "Name", "Department");
-//                    String query2 = "SELECT enrolledstud FROM courses WHERE courses.courseid = ?";
 
                     PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.ENROLLED_STUDENTS_IN_A_COURSE);
-                    pstmt2.setInt(1,cid);
+                    pstmt2.setInt(1, cid);
                     ResultSet rs2 = pstmt2.executeQuery();
 
-//                    Get list of students for course
                     List<Integer> stud = new ArrayList<>();
                     while (rs2.next()) {
                         String res = rs2.getString("enrolledstud");
-//                        System.out.println(res);
                         if (rs2.wasNull()) {
                             System.out.println("    No students enrolled yet for this course");
                             break;
@@ -192,7 +191,6 @@ public class professordao implements professordaointerface{
                                 studentList.add(student);
                             }
 
-
                             for (ArrayList<String> student : studentList) {
                                 System.out.printf("%10s %20s %20s", student.get(0), student.get(1), student.get(2));
                             }
@@ -207,42 +205,43 @@ public class professordao implements professordaointerface{
         }
     }
 
+    /**
+     * Adds grades for students in a specific course taught by the professor.
+     * @param profid The ID of the professor
+     * @param courseid The ID of the course
+     * @param sem The semester number
+     */
     public void addGrade(int profid, int courseid, int sem) {
         try {
-
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_COURSE_COUNT);
-            pstmt.setInt(1,courseid);
-            pstmt.setInt(2,profid);
+            pstmt.setInt(1, courseid);
+            pstmt.setInt(2, profid);
             ResultSet rs = pstmt.executeQuery();
 
-            int  check=0;
+            int check = 0;
             while (rs.next()) {
-                check=rs.getInt("COUNT(*)");
+                check = rs.getInt("COUNT(*)");
             }
-            if (check==0){
+            if (check == 0) {
                 System.out.println("Not teaching this course!");
-            }
-
-            else{
+            } else {
                 PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.ENROLLED_STUDENTS_BY_PROF);
-                pstmt2.setInt(1,courseid);
-                pstmt2.setInt(2,profid);
+                pstmt2.setInt(1, courseid);
+                pstmt2.setInt(2, profid);
                 ResultSet rs2 = pstmt2.executeQuery();
-
 
                 List<Integer> stud = new ArrayList<>();
                 while (rs2.next()) {
-                    String res=rs2.getString("enrolledstud");
-//                        System.out.println(res);
-                    if (rs2.wasNull()){
+                    String res = rs2.getString("enrolledstud");
+                    if (rs2.wasNull()) {
                         System.out.println("No students enrolled yet for this course");
                         break;
                     }
-                    System.out.println("Enter Grades for course ID "+courseid+" for each student :-");
+                    System.out.println("Enter Grades for course ID " + courseid + " for each student :-");
                     Scanner scanner = new Scanner(System.in);
                     for (String id_string : res.split(",")) {
                         int studid = Integer.parseInt(id_string);
-                        System.out.print("Enter Grade for student ID "+studid+" :-");
+                        System.out.print("Enter Grade for student ID " + studid + " :-");
                         int grade = scanner.nextInt();
 
                         String update_query_grade = "INSERT INTO grades VALUES(?,?,?,?,?)";
@@ -257,11 +256,9 @@ public class professordao implements professordaointerface{
                     System.out.println();
                     System.out.println("Grades submitted successfully");
                 }
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
 }

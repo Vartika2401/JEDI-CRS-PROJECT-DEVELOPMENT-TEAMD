@@ -1,6 +1,7 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
+
 /**
- * @author Group-D
+ * Author: Group-D
  * Vartika
  * Rohan Mitra
  * Rishabh Verma
@@ -9,6 +10,7 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
  * Asritha Dama
  * Prajwal Rayal
  **/
+
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
 
@@ -16,15 +18,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class gradedao {
+public class gradedao implements gradejaointerface{
     DBUtils db = new DBUtils();
     Connection conn = db.getConnection();
+
+    /**
+     * Retrieves the grades for a student in the specified courses.
+     * @param studentID The ID of the student
+     * @param courseids The list of course IDs for which grades are needed
+     * @return A list of grades for the specified courses
+     */
     public List<Integer> getGrades(int studentID, List<Integer> courseids) {
         try {
-//            select all the rows where studennt id = student id and course id = course id
             List<Integer> grades = new ArrayList<>();
             for (int courseid : courseids) {
-//                String query = "SELECT * from grades WHERE studentid=? and courseid=?";
                 PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_STUDENT_GRADES);
                 pstmt.setInt(1, studentID);
                 pstmt.setInt(2, courseid);
@@ -33,15 +40,10 @@ public class gradedao {
                 while (rs.next()) {
                     grades.add(rs.getInt("grade"));
                 }
-                return grades;
             }
             return grades;
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }

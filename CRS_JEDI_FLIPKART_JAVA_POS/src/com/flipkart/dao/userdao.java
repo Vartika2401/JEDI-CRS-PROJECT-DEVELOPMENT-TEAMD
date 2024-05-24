@@ -11,11 +11,14 @@ public class userdao implements userdaointerface {
     Connection conn = db.getConnection();
     Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Registers a new student in the system.
+     * @return 0 if registration is successful
+     */
     @Override
     public int registerstudent() {
         try {
             Statement stmt = conn.createStatement();
-
             ResultSet rs = stmt.executeQuery(SQLConstant.USER_COUNT);
             Integer sid = null;
             while (rs.next()) {
@@ -31,9 +34,11 @@ public class userdao implements userdaointerface {
             String pass = scanner.next();
             System.out.println("Enter your department");
             String department = scanner.next();
+
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.ADD_STUDENT_IN_STUDENT);
             pstmt.setInt(1, sid);
             pstmt.setString(2, department);
+
             PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.ADD_STUDENT_IN_USER);
             pstmt1.setInt(1, sid);
             pstmt1.setString(2, name);
@@ -56,7 +61,12 @@ public class userdao implements userdaointerface {
         return 0;
     }
 
-    public Boolean checkapproved(int studentID){
+    /**
+     * Checks if a student's registration is approved.
+     * @param studentID The ID of the student
+     * @return True if the student's registration is approved, false otherwise
+     */
+    public Boolean checkapproved(int studentID) {
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.CHECK_STUDENT_APPROVAL);
             pstmt.setInt(1, studentID);
@@ -66,27 +76,33 @@ public class userdao implements userdaointerface {
                 if (approval == 0) return false;
             }
             return true;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String getname(int studentID){
+    /**
+     * Retrieves the name of a student based on their ID.
+     * @param studentID The ID of the student
+     * @return The name of the student
+     */
+    public String getname(int studentID) {
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_USER_NAME);
             pstmt.setInt(1, studentID);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             return rs.getString("name");
-
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Changes the password for a student.
+     */
     public void changepassword() {
         try {
-
             Statement stmt = conn.createStatement();
             System.out.println("Enter your Student ID");
             Integer id = scanner.nextInt();
@@ -107,16 +123,19 @@ public class userdao implements userdaointerface {
             } else {
                 System.out.println("Invalid Student ID or Password");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public  String login(int studentID, String password) {
+    /**
+     * Logs in a student using their ID and password.
+     * @param studentID The ID of the student
+     * @param password The password of the student
+     * @return The role of the user if login is successful, "null" otherwise
+     */
+    public String login(int studentID, String password) {
         try {
-
             Statement stmt = conn.createStatement();
             Integer id = studentID;
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.CHECK_PASSWORD);
@@ -135,7 +154,6 @@ public class userdao implements userdaointerface {
                 System.out.println();
                 return "null";
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

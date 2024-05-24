@@ -13,44 +13,38 @@ public class admindao implements admindaointerface {
     DBUtils db = new DBUtils();
     Connection conn = db.getConnection();
 
-    public void  approveregistration(int studid,String pass){
-        try{
-            PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.CHECK_USER);
-            pstmt2.setInt(1,studid);
-            ResultSet rs2 = pstmt2.executeQuery();
-            if (rs2.next()){
-                int check = rs2.getInt("approval");
-                if (check==1){
-                    System.out.println("Student already approved");
-                    return;
-                }
-            }
+    /**
+     * Approves the registration of a student.
+     * @param studid The ID of the student
+     * @param pass The password of the student
+     */
+    public void approveregistration(int studid, String pass) {
+        try {
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_USER);
-            pstmt.setInt(1,studid);
-            pstmt.setString(2,pass);
+            pstmt.setInt(1, studid);
+            pstmt.setString(2, pass);
             ResultSet rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.APPROVE_REGISTRATION);
-                pstmt1.setInt(1,studid);
+                pstmt1.setInt(1, studid);
                 pstmt1.executeUpdate();
-                System.out.println("Student with ID: "+studid+" has been approved");
+                System.out.println("Student with ID: " + studid + " has been approved");
+            } else {
+                System.out.println("Student with ID: " + studid + " not found");
             }
-            else{
-                System.out.println("Student with ID: "+studid+" not found");
-            }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+    /**
+     * Approves courses based on the number of enrolled students.
+     */
     public void approvecourses() {
         try {
-//            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(SQLConstant.GET_COURSE_APPROVAL);
             while (rs.next()) {
-
                 int courseid = rs.getInt("courseid");
                 String enrolled = rs.getString("enrolledstud");
                 List<Integer> enrolledstudents = new ArrayList<>();
@@ -72,9 +66,6 @@ public class admindao implements admindaointerface {
                 } else {
                     if (enrolledstudents.size() < 3) {
                         System.out.println("Course with ID: " + courseid + " has less than 3 students");
-//                        remove this course from student's catalog
-                        studentdao studentdao = new studentdao();
-
                     } else {
                         System.out.println("Course with ID: " + courseid + " has more than 10 students");
                     }
@@ -89,20 +80,22 @@ public class admindao implements admindaointerface {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
+    /**
+     * Adds a course to the catalog.
+     * @param courseid The ID of the course
+     * @param coursename The name of the course
+     * @param prereq The prerequisites for the course
+     * @param coursedept The department offering the course
+     */
     public void add_course_to_Catalog(int courseid, String coursename, String prereq, String coursedept) {
         try {
-//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//            check if course already exists
-//            String check_query = "SELECT * FROM courses WHERE courseid = ?";
             AdminValidator adminValidator = new AdminValidator();
             if (adminValidator.coursealreadyexists(courseid)) {
                 System.out.println("Course already exists in catalog");
                 return;
             }
-//            String query = "INSERT INTO courses(courseid,coursename,prereq,coursedept,approvalstatus) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.ADD_COURSE);
             pstmt.setInt(1, courseid);
             pstmt.setString(2, coursename);
@@ -115,11 +108,12 @@ public class admindao implements admindaointerface {
         }
     }
 
+    /**
+     * Deletes a course from the catalog using the course ID.
+     * @param courseid The ID of the course to be deleted
+     */
     public void delete_course_input(int courseid) {
         try {
-//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//            check if course already exists
-//            String check_query = "SELECT * FROM courses WHERE courseid = ?";
             PreparedStatement pstmt_check = conn.prepareStatement(SQLConstant.GET_COURSE_DETAILS);
             pstmt_check.setInt(1, courseid);
             ResultSet rs = pstmt_check.executeQuery();
@@ -143,7 +137,6 @@ public class admindao implements admindaointerface {
                         studentdao.deleteCourse(courses, student, courseid);
                     }
                 }
-//                String query = "DELETE FROM courses WHERE courseid = ?";
                 PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DELETE_COURSE);
                 pstmt.setInt(1, courseid);
                 pstmt.executeUpdate();
@@ -151,24 +144,22 @@ public class admindao implements admindaointerface {
                 return;
             } else {
                 System.out.println("Course does not exist in catalog");
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Deletes courses from the catalog that have an incorrect student count.
+     */
     public void delete_course_student_count_wrong() {
         try {
-//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
-//            drop course from student table
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(SQLConstant.GET_ENROLLED_STUDENTS);
             while (rs.next()) {
                 List<Integer> enrolledstudents = new ArrayList<>();
                 int courseid = rs.getInt("courseid");
-//                split rs.getString("enrolledstudents") and add to enrolledstudents
                 String enrolled = rs.getString("enrolledstud");
 
                 try {
@@ -178,7 +169,6 @@ public class admindao implements admindaointerface {
                     }
                 } catch (Exception e) {
                     System.out.println("Course with ID: " + courseid + " has been deleted");
-//                    String query = "DELETE FROM courses WHERE courseid = ?";
                     PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DELETE_COURSE);
                     pstmt.setInt(1, courseid);
                     pstmt.executeUpdate();
@@ -194,28 +184,26 @@ public class admindao implements admindaointerface {
                         List<Integer> courses = studentdao.showEnrolledCourses(student);
                         studentdao.deleteCourse(courses, student, courseid);
                     }
-
                 } else {
                     System.out.println("Course with ID: " + courseid + " has more than 10 students");
                     System.out.println("Course ID: " + courseid);
                     System.out.println("Enrolled Students: " + enrolledstudents);
                 }
-//                String query = "DELETE FROM courses WHERE courseid = ?";
                 PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DELETE_COURSE);
                 pstmt.setInt(1, courseid);
                 pstmt.executeUpdate();
                 System.out.println("Course deleted from catalog");
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
+    /**
+     * Enables the add/drop period.
+     */
     public void enable_add_drop() {
         try {
-//            String query = "UPDATE system SET adddrop = 1";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.ENABLE_ADD_DROP);
             pstmt.executeUpdate();
             System.out.println("Add Drop enabled");
@@ -224,9 +212,11 @@ public class admindao implements admindaointerface {
         }
     }
 
+    /**
+     * Disables the add/drop period.
+     */
     public void disable_add_drop() {
         try {
-//            String query = "UPDATE system SET adddrop = 0";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DISABLE_ADD_DROP);
             pstmt.executeUpdate();
             System.out.println("Add Drop disabled");
@@ -235,9 +225,11 @@ public class admindao implements admindaointerface {
         }
     }
 
+    /**
+     * Declares the result.
+     */
     public void declare_result() {
         try {
-//            String query = "UPDATE system SET declare = 1";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DECLARE_RESULT);
             pstmt.executeUpdate();
             System.out.println("Result declared");
@@ -246,9 +238,11 @@ public class admindao implements admindaointerface {
         }
     }
 
+    /**
+     * Stops the declaration of results.
+     */
     public void stop_result() {
         try {
-//            String query = "UPDATE system SET declare = 0";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.STOP_RESULT);
             pstmt.executeUpdate();
             System.out.println("Result stopped");

@@ -1,6 +1,9 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
+
+import java.util.List;
+
 /**
- * @author Group-D
+ * Author: Group-D
  * Vartika
  * Rohan Mitra
  * Rishabh Verma
@@ -10,5 +13,11 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
  * Prajwal Rayal
  **/
 public interface gradejaointerface {
-    public void getGrade(int studentID, int courseID);
+
+    /**
+     * Retrieves the grade for a student in a specific course.
+     * @param studentID The ID of the student
+     * @param courseID The ID of the course
+     */
+    public List<Integer> getGrades(int studentID, List<Integer> courseID);
 }
