@@ -31,11 +31,9 @@ public class userdao implements userdaointerface {
             String pass = scanner.next();
             System.out.println("Enter your department");
             String department = scanner.next();
-//            String stu_query = "INSERT INTO student (studentid, department) VALUES (?,?)";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.ADD_STUDENT_IN_STUDENT);
             pstmt.setInt(1, sid);
             pstmt.setString(2, department);
-//            String user_query = "INSERT INTO user (id,name,contact,email,password) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.ADD_STUDENT_IN_USER);
             pstmt1.setInt(1, sid);
             pstmt1.setString(2, name);
@@ -43,7 +41,6 @@ public class userdao implements userdaointerface {
             pstmt1.setString(4, email);
             pstmt1.setString(5, pass);
 
-//            String user_query_role = "INSERT INTO user_roles (userid,role) VALUES (?, ?)";
             PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.ADD_STUDENT_IN_USER_ROLES);
             pstmt2.setInt(1, sid);
             pstmt2.setString(2, "student");
