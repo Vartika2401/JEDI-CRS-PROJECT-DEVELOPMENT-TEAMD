@@ -1,5 +1,7 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,13 +9,11 @@ import java.util.Scanner;
 
 public class studentdao implements studentdaointerface {
     Scanner scanner = new Scanner(System.in);
-    static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
-    static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    DBUtils db = new DBUtils();
+    Connection conn = db.getConnection();
 
     public void getStudent(int studentid) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //                select rows where studentid = studentid and user id = studentid
             String query = "SELECT * FROM student LEFT JOIN user ON student.studentid = user.id WHERE student.studentid = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -36,7 +36,6 @@ public class studentdao implements studentdaointerface {
 
     public List<Integer> showcourses() {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //                select rows where studentid = studentid and user id = studentid
 //            take the courses where prof id is not null and get the prof name from prof table
             String query = "SELECT profid,courseid,coursename,prereq,coursedept FROM prof LEFT JOIN courses ON courses.c_profid = prof.profid WHERE courses.c_profid IS NOT NULL";
@@ -64,7 +63,6 @@ public class studentdao implements studentdaointerface {
 
     public List<Integer> showEnrolledCourses(int studentID) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //                select rows where studentid = studentid and user id = studentid
 //            take the courses where prof id is not null and get the prof name from prof table
             String query= "SELECT enrolledcourses FROM student WHERE studentid = ?";
@@ -87,7 +85,6 @@ public class studentdao implements studentdaointerface {
 
     public void addCourse(List<Integer> courses, int studentid, int courseid) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             String check_if_course_exists = "SELECT * FROM courses WHERE courseid = ?";
             PreparedStatement pstmt1 = conn.prepareStatement(check_if_course_exists);
             pstmt1.setInt(1, courseid);
@@ -155,7 +152,6 @@ public class studentdao implements studentdaointerface {
 
     public void deleteCourse(List<Integer> courses, int studentid,int courseid) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             if (!courses.contains(courseid)) {
                 System.out.println("Course not found in available courses!");
                 return;
@@ -185,7 +181,6 @@ public class studentdao implements studentdaointerface {
     }
     public void addCoursetocoursecatalog(int studentid, int courseid) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             String check_if_course_exists = "SELECT * FROM courses WHERE courseid = ?";
             PreparedStatement pstmt1 = conn.prepareStatement(check_if_course_exists);
             pstmt1.setInt(1, courseid);

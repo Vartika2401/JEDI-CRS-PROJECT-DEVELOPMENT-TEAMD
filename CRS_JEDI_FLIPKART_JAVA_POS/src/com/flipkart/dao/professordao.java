@@ -1,5 +1,7 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,13 +9,11 @@ import java.util.Scanner;
 
 public class professordao implements professordaointerface{
     Scanner scanner = new Scanner(System.in);
-    static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
-    static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    DBUtils db = new DBUtils();
+    Connection conn = db.getConnection();
 
     public void getProf(int profid) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //                select rows where profid = profid and user id = profid
             String query = "SELECT * FROM prof LEFT JOIN user ON prof.profid = user.id WHERE prof.profid = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -36,7 +36,6 @@ public class professordao implements professordaointerface{
 
     public List<Integer> showFreeCourses() {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //            take the courses where prof id is null
             String query = "SELECT courseid,coursename,prereq,coursedept FROM courses WHERE courses.c_profid IS NULL";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -62,7 +61,6 @@ public class professordao implements professordaointerface{
 
     public void selectCourse(List<Integer> courses, int profid, int courseid) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             if (!courses.contains(courseid)) {
                 System.out.println("Course not free to select");
@@ -127,7 +125,6 @@ public class professordao implements professordaointerface{
 
     public void showStudents(int profid){
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             String query = "SELECT courseid FROM courses WHERE courses.c_profid = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -184,7 +181,6 @@ public class professordao implements professordaointerface{
 
     public void addGrade(int profid, int courseid, int sem) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             String query = "SELECT COUNT(*) FROM courses WHERE courses.courseid=? and courses.c_profid = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);

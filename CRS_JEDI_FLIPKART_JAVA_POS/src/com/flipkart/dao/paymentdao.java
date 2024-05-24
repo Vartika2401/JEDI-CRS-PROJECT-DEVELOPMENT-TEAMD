@@ -1,5 +1,7 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -7,12 +9,10 @@ import java.util.Scanner;
 
 public class paymentdao {
     Scanner scanner = new Scanner(System.in);
-    static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
-    static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    DBUtils db = new DBUtils();
+    Connection conn = db.getConnection();
     public Integer getfeeAmount(Integer semid){
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //                select rows where studentid = studentid and user id = studentid
             String query = "SELECT * from fees_requirement WHERE semno=?";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -30,7 +30,6 @@ public class paymentdao {
     }
     public void onlinepayment(Integer amount,Integer studentid, Integer semno){
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //                select rows where studentid = studentid and user id = studentid
             String query = "INSERT INTO payments(studentid,semno,paymentamount,paymentmode) VALUES(?,?,?,'online')";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -45,7 +44,6 @@ public class paymentdao {
     }
     public void offlinepayment(Integer amount,Integer studentid, Integer semno) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             String query = "INSERT INTO payments(studentid,semno,paymentamount,paymentmode) VALUES(?,?,?,'offline')";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, studentid);

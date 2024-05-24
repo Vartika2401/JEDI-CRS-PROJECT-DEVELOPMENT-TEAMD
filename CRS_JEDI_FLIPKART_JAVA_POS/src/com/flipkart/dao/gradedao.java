@@ -1,16 +1,16 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class gradedao {
-    static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
-    static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    DBUtils db = new DBUtils();
+    Connection conn = db.getConnection();
     public List<Integer> getGrades(int studentID, List<Integer> courseids) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //            select all the rows where studennt id = student id and course id = course id
             List<Integer> grades = new ArrayList<>();
             for (int courseid : courseids) {

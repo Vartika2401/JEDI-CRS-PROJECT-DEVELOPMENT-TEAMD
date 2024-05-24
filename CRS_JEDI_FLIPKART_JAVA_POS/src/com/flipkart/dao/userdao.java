@@ -1,18 +1,18 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
+
 import java.sql.*;
 import java.util.Scanner;
 
 public class userdao implements userdaointerface {
-    static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
-    static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    DBUtils db = new DBUtils();
+    Connection conn = db.getConnection();
     Scanner scanner = new Scanner(System.in);
 
     @Override
     public int registerstudent() {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             String student_id = "select count(*) from user";
 
             Statement stmt = conn.createStatement();
@@ -65,7 +65,6 @@ public class userdao implements userdaointerface {
 
     public void changepassword() {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             Statement stmt = conn.createStatement();
             System.out.println("Enter your Student ID");
@@ -99,7 +98,6 @@ public class userdao implements userdaointerface {
 
     public  String login(int studentID, String password) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             Statement stmt = conn.createStatement();
             Integer id = studentID;

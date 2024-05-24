@@ -1,18 +1,17 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class admindao implements admindaointerface{
-    static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
-    static final String USER = "root";
-    static final String PASS = "mahi_7781";
+    DBUtils db = new DBUtils();
+    Connection conn = db.getConnection();
     public void approvecourses() {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(SQLConstant.GET_COURSE_APPROVAL);
@@ -56,7 +55,7 @@ public class admindao implements admindaointerface{
     }
     public void add_course_to_Catalog(int courseid, String coursename, String prereq, String coursedept) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //            check if course already exists
             String check_query = "SELECT * FROM courses WHERE courseid = ?";
             PreparedStatement pstmt_check = conn.prepareStatement(check_query);
@@ -80,7 +79,7 @@ public class admindao implements admindaointerface{
     }
     public void delete_course_input(int courseid) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //            check if course already exists
             String check_query = "SELECT * FROM courses WHERE courseid = ?";
             PreparedStatement pstmt_check = conn.prepareStatement(check_query);
@@ -119,7 +118,7 @@ public class admindao implements admindaointerface{
     }
     public void delete_course_student_count_wrong() {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
 //            drop course from student table
             Statement stmt = conn.createStatement();
