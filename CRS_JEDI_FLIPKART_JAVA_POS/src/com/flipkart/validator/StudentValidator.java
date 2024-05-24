@@ -8,6 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class StudentValidator {
+
+    /**
+     * Checks if a student exists in the database.
+     * @param studentID The ID of the student to be checked
+     * @return True if the student exists, false otherwise
+     */
     public static boolean studentExists(int studentID) {
         try {
             DBUtils db = new DBUtils();
@@ -20,6 +26,12 @@ public class StudentValidator {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Checks if a course exists in the database.
+     * @param CourseID The ID of the course to be checked
+     * @return True if the course exists, false otherwise
+     */
     public static boolean courseexist(int CourseID) {
         try {
             DBUtils db = new DBUtils();

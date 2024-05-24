@@ -9,6 +9,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ProfValidator {
+
+    /**
+     * Checks if a course has no assigned professor.
+     * @param CourseID The ID of the course to be checked
+     * @return True if the course has no professor, false otherwise
+     * @throws SQLException If there is an error accessing the database
+     */
     public static boolean coursehasnoprof(int CourseID) throws SQLException {
         DBUtils db = new DBUtils();
         Connection conn = db.getConnection();
@@ -21,7 +28,12 @@ public class ProfValidator {
         return true;
     }
 
-    public static boolean nocourse(List<Integer> students) {
-        return students.size() == 0;
+    /**
+     * Checks if there are no courses assigned.
+     * @param courses The list of courses
+     * @return True if there are no courses, false otherwise
+     */
+    public static boolean nocourse(List<Integer> courses) {
+        return courses.size() == 0;
     }
 }
