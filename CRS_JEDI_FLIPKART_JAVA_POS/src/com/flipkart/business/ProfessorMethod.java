@@ -2,11 +2,10 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
 //package com.flipkart.business;
 
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.professordao;
-import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.studentdao;
-
 import java.util.List;
+
 /**
- * @author Group-D
+ * Author: Group-D
  * Vartika
  * Rohan Mitra
  * Rishabh Verma
@@ -18,32 +17,53 @@ import java.util.List;
 
 public class ProfessorMethod implements ProfessorInterface {
 
+	/**
+	 * Retrieves the professor's details based on the professor ID.
+	 * @param profid The ID of the professor
+	 */
 	@Override
 	public void getProf(int profid) {
 		professordao professordao = new professordao();
 		professordao.getProf(profid);
-
 	}
 
+	/**
+	 * Shows the list of courses that are free (available).
+	 * @return A list of free course IDs
+	 */
 	public List<Integer> showFreeCourses() {
 		professordao professordao = new professordao();
 		return professordao.showFreeCourses();
 	}
 
-	public  void selectCourse(List<Integer> courses, int profid, int courseid){
-		professordao profesordao = new professordao();
-		profesordao.selectCourse(courses, profid, courseid);
+	/**
+	 * Selects a course for the professor.
+	 * @param courses The list of courses to be selected
+	 * @param profid The ID of the professor
+	 * @param courseid The ID of the course to be selected
+	 */
+	public void selectCourse(List<Integer> courses, int profid, int courseid) {
+		professordao professordao = new professordao();
+		professordao.selectCourse(courses, profid, courseid);
 	}
 
+	/**
+	 * Shows the students enrolled in the professor's courses.
+	 * @param profid The ID of the professor
+	 */
 	public void showStudents(int profid) {
-		professordao profesordao = new professordao();
-		profesordao.showStudents(profid);
+		professordao professordao = new professordao();
+		professordao.showStudents(profid);
 	}
 
+	/**
+	 * Adds a grade for a student in a specific course and semester.
+	 * @param profid The ID of the professor
+	 * @param courseid The ID of the course
+	 * @param sem The semester number
+	 */
 	public void addGrade(int profid, int courseid, int sem) {
-		professordao profesordao = new professordao();
-		profesordao.addGrade(profid, courseid, sem);
+		professordao professordao = new professordao();
+		professordao.addGrade(profid, courseid, sem);
 	}
-
-
 }

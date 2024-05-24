@@ -1,9 +1,11 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
+
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.gradedao;
 
 import java.util.List;
+
 /**
- * @author Group-D
+ * Author: Group-D
  * Vartika
  * Rohan Mitra
  * Rishabh Verma
@@ -12,15 +14,20 @@ import java.util.List;
  * Asritha Dama
  * Prajwal Rayal
  **/
-//package com.flipkart.business;
-//
-public class gradeMethods {
+
+public class gradeMethods implements gradeInterface{
     private String courseID;
     private String courseName;
     private String grade;
 
-    public List<Integer> getGrades(int studentID, List<Integer> courseids) {
+    /**
+     * Gets the grades for a student in the specified courses.
+     * @param studentID The ID of the student
+     * @param courseIDs The list of course IDs for which grades are needed
+     * @return A list of grades for the specified courses
+     */
+    public List<Integer> getGrades(int studentID, List<Integer> courseIDs) {
         gradedao gradedao = new gradedao();
-        return gradedao.getGrades(studentID, courseids);
+        return gradedao.getGrades(studentID, courseIDs);
     }
 }
