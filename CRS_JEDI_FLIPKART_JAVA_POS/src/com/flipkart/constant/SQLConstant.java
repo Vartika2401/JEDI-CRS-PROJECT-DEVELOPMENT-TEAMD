@@ -1,6 +1,6 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant;
 public class SQLConstant {
-    public static final String GET_COURSE_APPROVAL = "select * from courses where approval_status = 0";
+    public static final String GET_COURSE_APPROVAL = "select courseid,enrolledstud from courses where approvalstatus= 0";
     public static final String UPDATE_APPROVAL_STATUS = "UPDATE courses SET approvalstatus = 1 WHERE courseid = ?";
     public static final String GET_COURSE_DETAILS = "select * from courses where courseid = ?";
     public static final String ADD_COURSE = "INSERT INTO courses(courseid, coursename, prereq, coursedept) VALUES(?,?,?,?)";

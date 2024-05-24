@@ -16,14 +16,19 @@ public class admindao implements admindaointerface{
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(SQLConstant.GET_COURSE_APPROVAL);
             while (rs.next()) {
-                List<Integer> enrolledstudents = new ArrayList<>();
+
                 int courseid = rs.getInt("courseid");
 //                split rs.getString("enrolledstudents") and add to enrolledstudents
                 String enrolled = rs.getString("enrolledstud");
-                String[] students = enrolled.split(",");
-                for (String student : students) {
-                    enrolledstudents.add(Integer.parseInt(student));
+                List<Integer> enrolledstudents = new ArrayList<>();
+
+                if (!rs.wasNull()){
+                    String[] students = enrolled.split(",");
+                    for (String student : students) {
+                        enrolledstudents.add(Integer.parseInt(student));
+                    }
                 }
+
                 System.out.println("Course ID: " + courseid);
                 System.out.println("Enrolled Students: " + enrolledstudents);
                 if (enrolledstudents.size() >= 3 && enrolledstudents.size() <= 10) {
@@ -40,6 +45,7 @@ public class admindao implements admindaointerface{
                     } else {
                         System.out.println("Course with ID: " + courseid + " has more than 10 students");
                     }
+
                     studentdao studentdao = new studentdao();
                     for (int student : enrolledstudents) {
                         List<Integer> courses = studentdao.showEnrolledCourses(student);
@@ -86,12 +92,16 @@ public class admindao implements admindaointerface{
             pstmt_check.setInt(1, courseid);
             ResultSet rs = pstmt_check.executeQuery();
             if (rs.next()) {
-                List<Integer> enrolledstudents = new ArrayList<>();//                split rs.getString("enrolledstudents") and add to enrolledstudents
                 String enrolled = rs.getString("enrolledstud");
-                String[] students = enrolled.split(",");
-                for (String student : students) {
-                    enrolledstudents.add(Integer.parseInt(student));
+                List<Integer> enrolledstudents = new ArrayList<>();
+
+                if (!rs.wasNull()){
+                    String[] students = enrolled.split(",");
+                    for (String student : students) {
+                        enrolledstudents.add(Integer.parseInt(student));
+                    }
                 }
+
                 if (enrolledstudents.size() == 0) {
                     System.out.println("Course with ID: " + courseid + " has been deleted");
                 } else {

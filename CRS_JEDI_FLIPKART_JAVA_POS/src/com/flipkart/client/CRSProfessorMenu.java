@@ -55,8 +55,13 @@ public class CRSProfessorMenu {
 						professorMethod.addGrade(profID,CourseID,sem);
 						break;
 	                case 5:
-	                    System.out.println("Logging Out...");
-	                    break;
+						System.out.println("Logging Out...");
+						CRSApplicationClient crsApplicationClient = new CRSApplicationClient();
+						crsApplicationClient.main(null);
+						break;
+					default:
+						System.out.println("Invalid choice");
+						break;
 	            }
 	        } while (choice != 5);
 	 

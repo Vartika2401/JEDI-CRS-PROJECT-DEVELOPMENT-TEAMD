@@ -61,20 +61,21 @@ public class CRSAdminMenu {
                     }
                     break;
                 case 4:
-//                    removeCoursesFromCatalog();
-                    break;
-                case 5:
 //                    enableAddDrop();
                     break;
-                case 6:
+                case 5:
 //                    declareResult();
                     break;
-                case 7:
-//                    exit();
+                case 6:
+                  System.out.println("Logging Out...");
+                  CRSApplicationClient crsApplicationClient = new CRSApplicationClient();
+                  crsApplicationClient.main(null);
+                  break;
+                default:
+                    System.out.println("Invalid Choice");
                     break;
-
             }
-        } while (choice != 7);
+        } while (choice != 6);
 
         scanner.close();
     }
