@@ -11,8 +11,15 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * 
- */
+ * @author Group-D
+ * Vartika
+ * Rohan Mitra
+ * Rishabh Verma
+ * Shivali Gupta
+ * Srujana Sri
+ * Asritha Dama
+ * Prajwal Rayal
+ **/
 public class CRSProfessorMenu {
 	
 	    public void ProfessorMenu(int profID) {

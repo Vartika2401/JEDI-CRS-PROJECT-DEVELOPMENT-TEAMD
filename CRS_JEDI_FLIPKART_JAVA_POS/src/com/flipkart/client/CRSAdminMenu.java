@@ -9,8 +9,15 @@ import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business.AdminMethods;
 import java.util.Scanner;
 
 /**
- * 
- */
+ * @author Group-D
+ * Vartika
+ * Rohan Mitra
+ * Rishabh Verma
+ * Shivali Gupta
+ * Srujana Sri
+ * Asritha Dama
+ * Prajwal Rayal
+ **/
 public class CRSAdminMenu {
 
     public void AdminMenu() {

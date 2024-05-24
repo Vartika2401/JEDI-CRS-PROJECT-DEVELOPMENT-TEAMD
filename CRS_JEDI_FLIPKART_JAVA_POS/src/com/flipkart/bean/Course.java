@@ -1,6 +1,18 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.bean;
 //package com.flipkart.bean;
 
+
+/**
+ * @author Group-D
+ * Vartika
+ * Rohan Mitra
+ * Rishabh Verma
+ * Shivali Gupta
+ * Srujana Sri
+ * Asritha Dama
+ * Prajwal Rayal
+ **/
+
 import java.util.*;
 
 public class Course {

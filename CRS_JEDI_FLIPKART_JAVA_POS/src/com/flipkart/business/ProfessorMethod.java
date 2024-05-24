@@ -5,7 +5,16 @@ import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.professordao;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.studentdao;
 
 import java.util.List;
-
+/**
+ * @author Group-D
+ * Vartika
+ * Rohan Mitra
+ * Rishabh Verma
+ * Shivali Gupta
+ * Srujana Sri
+ * Asritha Dama
+ * Prajwal Rayal
+ **/
 
 public class ProfessorMethod implements ProfessorInterface {
 

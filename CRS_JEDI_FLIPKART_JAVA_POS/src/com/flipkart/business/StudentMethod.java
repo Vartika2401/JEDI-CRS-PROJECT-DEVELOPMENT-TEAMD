@@ -3,6 +3,17 @@ import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.studentdao;
 
 import java.util.List;
 //package com.flipkart.business;
+/**
+ * @author Group-D
+ * Vartika
+ * Rohan Mitra
+ * Rishabh Verma
+ * Shivali Gupta
+ * Srujana Sri
+ * Asritha Dama
+ * Prajwal Rayal
+ **/
+
 
 public class StudentMethod implements StudentInterface {
 

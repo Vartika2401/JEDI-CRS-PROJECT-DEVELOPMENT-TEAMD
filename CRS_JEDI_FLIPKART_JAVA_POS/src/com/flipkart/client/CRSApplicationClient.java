@@ -10,8 +10,15 @@ import java.time.LocalTime;
 import java.util.Scanner;
 
 /**
- * 
- */
+ * @author Group-D
+ * Vartika
+ * Rohan Mitra
+ * Rishabh Verma
+ * Shivali Gupta
+ * Srujana Sri
+ * Asritha Dama
+ * Prajwal Rayal
+ **/
 public class CRSApplicationClient {
 	static final String DB_URL = "jdbc:mysql://localhost/CRSSchema";
 	static final String USER = "root";
