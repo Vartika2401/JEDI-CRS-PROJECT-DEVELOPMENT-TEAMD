@@ -49,8 +49,12 @@ public class CRSStudentMenu {
 //	    	            	addCourse(courses, StudentID, CourseID);
 	    	            }
 	    	            else if (coursech==2) {
-							System.out.println("Already Enrolled Courses: ");
 							List<Integer> enrolledCourses = studentMethod.showEnrolledCourses(studentID);
+							if (enrolledCourses.size()==0){
+								System.out.println("No courses enrolled yet!");
+								break;
+							}
+							System.out.println("Already Enrolled Courses: ");
 							System.out.println(enrolledCourses);
 							System.out.println("Enter Course ID to remove: ");
 							int CourseID = scanner.nextInt();
@@ -70,6 +74,10 @@ public class CRSStudentMenu {
 						List<Integer> courseids = studentMethod.showEnrolledCourses(studentID);
 						gradeMethods gradeMethods = new gradeMethods();
 						List<Integer> grades = gradeMethods.getGrades(studentID, courseids);
+						if (grades.size()==0){
+							System.out.println("Grades not uploaded yet");
+							break;
+						}
 						System.out.println("Your Grades are: ");
 						int sum = 0;
 						for (int i = 0; i < grades.size(); i++) {

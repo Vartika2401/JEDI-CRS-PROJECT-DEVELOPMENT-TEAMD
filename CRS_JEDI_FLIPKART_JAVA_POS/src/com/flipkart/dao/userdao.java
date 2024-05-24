@@ -17,14 +17,13 @@ public class userdao implements userdaointerface {
 //            String student_id = "select count(*) from user";
 
             Statement stmt = conn.createStatement();
-            System.out.println("Hello");
+
             ResultSet rs = stmt.executeQuery(SQLConstant.USER_COUNT);
-            System.out.println(rs);
+           ;
             // Extract data from result set
             Integer sid = null;
             while (rs.next()) {
                 sid = rs.getInt("count(*)") + 1;
-                System.out.println(sid);
             }
             System.out.println("Enter your name");
             String name = scanner.next();

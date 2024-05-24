@@ -72,8 +72,13 @@ public class studentdao implements studentdaointerface {
             ResultSet rs = pstmt.executeQuery();
 //            initialize a list of courses
             List<Integer> courses = new ArrayList<>();
+
             while (rs.next()) {
-                for (String course : rs.getString("enrolledcourses").split(",")) {
+                String res = rs.getString("enrolledcourses");
+                if (rs.wasNull()){
+                    return courses;
+                }
+                for (String course : res.split(",")) {
                     courses.add(Integer.parseInt(course));
                 }
             }
