@@ -6,7 +6,16 @@ import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
 import java.sql.*;
 import java.util.Scanner;
 
-
+/**
+ * @author Group-D
+ * Vartika
+ * Rohan Mitra
+ * Rishabh Verma
+ * Shivali Gupta
+ * Srujana Sri
+ * Asritha Dama
+ * Prajwal Rayal
+ **/
 
 public class paymentdao {
     Scanner scanner = new Scanner(System.in);
