@@ -29,8 +29,10 @@ public class SQLConstant {
     public static final String ADD_STUDENT_IN_STUDENT = "INSERT INTO student(studentid,department) VALUES(?,?)";
     public static final String ADD_STUDENT_IN_USER = "INSERT INTO user(id,name,contact,email,password) VALUES(?,?,?,?,?)";
     public static final String ADD_STUDENT_IN_USER_ROLES = "INSERT INTO user_roles(userid,role) VALUES(?,?)";
+    public static final String CHECK_STUDENT_APPROVAL = "SELECT approval FROM user WHERE id = ?";
     public static final String CHECK_PASSWORD = "SELECT * FROM user WHERE id = ? AND password = ?";
     public static final String UPDATE_PASSWORD = "UPDATE user SET password = ? WHERE id = ?";
-    public static final String GET_USER_ROLE_NAME = "SELECT role,name FROM user_roles LEFT JOIN user ON user_roles.userid=user.id WHERE userid = ?";
+    public static final String GET_USER_ROLE = "SELECT role FROM user_roles WHERE userid = ?";
+    public static final String GET_USER_NAME = "SELECT name FROM user WHERE id = ?";
     public static final String CHECK_COURSE_PROF = "SELECT c_profid FROM courses WHERE courseid = ?";
 }

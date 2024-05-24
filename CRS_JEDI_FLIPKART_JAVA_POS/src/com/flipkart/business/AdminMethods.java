@@ -12,6 +12,11 @@ import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.admindao;
  * Prajwal Rayal
  **/
 public class AdminMethods implements AdminInterface {
+    public void  approveregistration(int studid){
+        admindao adminDao = new admindao();
+        adminDao.approveregistration(studid);
+    }
+
     public void approveCourses() {
         admindao adminDao = new admindao();
         adminDao.approvecourses();

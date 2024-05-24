@@ -10,6 +10,7 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
  * Prajwal Rayal
  **/
 public interface AdminInterface {
+    public void  approveregistration(int studid);
     public void approveCourses();
     public void addCoursesToCatalog(int courseid, String coursename, String prereq, String coursedept);
     public void removeCoursesFromCatalog_inp(int courseid);

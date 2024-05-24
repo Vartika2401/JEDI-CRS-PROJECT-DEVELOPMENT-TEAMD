@@ -63,11 +63,13 @@ public class CRSProfessorMenu {
 						break;
 	                case 5:
 						System.out.println("Logging Out...");
+						System.out.println();
 						CRSApplicationClient crsApplicationClient = new CRSApplicationClient();
 						crsApplicationClient.main(null);
 						break;
 					default:
 						System.out.println("Invalid choice");
+						System.out.println();
 						break;
 	            }
 	        } while (choice != 5);

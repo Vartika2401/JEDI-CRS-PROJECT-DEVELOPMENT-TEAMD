@@ -18,8 +18,18 @@ public class studentregistration  implements  studentregistratoninterface{
         // TODO Auto-generated method stub
         userdao user = new userdao();
         user.registerstudent();
-        System.out.println("Student Registered");
     }
+
+    public Boolean checkapproved(int studentID){
+        userdao user = new userdao();
+        return user.checkapproved(studentID);
+    }
+
+    public String getname(int studentID){
+        userdao user = new userdao();
+        return user.getname(studentID);
+    }
+
     public void changepassword() {
         // TODO Auto-generated method stub
         userdao user = new userdao();

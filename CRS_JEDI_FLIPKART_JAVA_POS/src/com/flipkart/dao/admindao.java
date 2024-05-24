@@ -1,14 +1,5 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
-/**
- * @author Group-D
- * Vartika
- * Rohan Mitra
- * Rishabh Verma
- * Shivali Gupta
- * Srujana Sri
- * Asritha Dama
- * Prajwal Rayal
- **/
+
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.bean.Admin;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
@@ -21,6 +12,10 @@ import java.util.List;
 public class admindao implements admindaointerface{
     DBUtils db = new DBUtils();
     Connection conn = db.getConnection();
+
+    public void  approveregistration(int studid){
+
+    }
     public void approvecourses() {
         try {
 //            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
@@ -29,7 +24,6 @@ public class admindao implements admindaointerface{
             while (rs.next()) {
 
                 int courseid = rs.getInt("courseid");
-//                split rs.getString("enrolledstudents") and add to enrolledstudents
                 String enrolled = rs.getString("enrolledstud");
                 List<Integer> enrolledstudents = new ArrayList<>();
 

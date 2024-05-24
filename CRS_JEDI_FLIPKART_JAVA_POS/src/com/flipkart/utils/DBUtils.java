@@ -30,7 +30,7 @@ public class DBUtils {
             {
 
                 Properties prop = new Properties();
-                InputStream inputStream = new FileInputStream("CRS_JEDI_FLIPKART_JAVA_POS/src/com/flipkart/config.properties");
+                InputStream inputStream = new FileInputStream("./config.properties");
                 prop.load(inputStream);
                 String driver = prop.getProperty("driver");
                 String url = prop.getProperty("url");

@@ -29,13 +29,14 @@ public class CRSApplicationClient {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-
-		System.out.println("Welcome to CRS application client");
-		System.out.println("Please enter your choice: \n 1.Login \n 2.Student Registration \n 3.Change Password \n 4.Exit");
-		System.out.print("\nEnter your choice: ");
 		Scanner scanner = new Scanner(System.in);
-		int choice = scanner.nextInt();
+		int choice;
+
+		do {
+			System.out.println("Welcome to CRS application client");
+			System.out.println("Please enter your choice: \n 1.Login \n 2.Student Registration \n 3.Change Password \n 4.Exit");
+			System.out.print("\nEnter your choice: ");
+			choice = scanner.nextInt();
 			switch (choice) {
 				case 1:
 					System.out.println("Enter your credentials to login");
@@ -45,11 +46,25 @@ public class CRSApplicationClient {
 					String password = scanner.next();
 					studentregistration login = new studentregistration();
 					String role = login.login(ID, password);
+					String name = login.getname(ID);
 
-					LocalDate localDate=LocalDate.now();
-					LocalTime localTime=LocalTime.now();
+					if (role.equals("student")) {
+						Boolean check = login.checkapproved(ID);
+						if (!check) {
+							System.out.println("Student not approved yet!");
+							System.out.println();
+							break;
+						}
+					} else if (role.equals("null")) break;
 
-					System.out.println(role+" logged in on "+ localDate + " at "+localTime);
+					System.out.println("Login Successful");
+					System.out.println();
+
+					LocalDate localDate = LocalDate.now();
+					LocalTime localTime = LocalTime.now();
+
+					System.out.println("Welcome " + name);
+					System.out.println(role + " logged in on " + localDate + " at " + localTime);
 
 					if (role.equals("student")) {
 						CRSStudentMenu studentMenu = new CRSStudentMenu();
@@ -65,6 +80,7 @@ public class CRSApplicationClient {
 				case 2:
 					studentregistration register = new studentregistration();
 					register.registerstudent();
+					System.out.println("Student Registered");
 					break;
 
 				case 3:
@@ -78,9 +94,10 @@ public class CRSApplicationClient {
 
 				default:
 					System.out.println("Invalid choice");
+					System.out.println();
 					break;
 			}
-
+		}while (choice!=4);
 
 		// TODO Auto-generated method stub
 

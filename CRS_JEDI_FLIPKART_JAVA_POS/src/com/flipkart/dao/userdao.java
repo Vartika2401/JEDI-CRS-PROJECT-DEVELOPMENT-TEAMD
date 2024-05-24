@@ -1,14 +1,5 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
-/**
- * @author Group-D
- * Vartika
- * Rohan Mitra
- * Rishabh Verma
- * Shivali Gupta
- * Srujana Sri
- * Asritha Dama
- * Prajwal Rayal
- **/
+
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
 
@@ -65,6 +56,34 @@ public class userdao implements userdaointerface {
         return 0;
     }
 
+    public Boolean checkapproved(int studentID){
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.CHECK_STUDENT_APPROVAL);
+            pstmt.setInt(1, studentID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int approval = rs.getInt("approval");
+                if (approval == 0) return false;
+            }
+            return true;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getname(int studentID){
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_USER_NAME);
+            pstmt.setInt(1, studentID);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            return rs.getString("name");
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void changepassword() {
         try {
 
@@ -105,18 +124,16 @@ public class userdao implements userdaointerface {
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                System.out.println("Login Successful");
-                PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.GET_USER_ROLE_NAME);
+                PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.GET_USER_ROLE);
                 pstmt1.setInt(1, id);
                 System.out.println();
                 ResultSet rs1 = pstmt1.executeQuery();
                 rs1.next();
-                String name= rs1.getString("name");
-                System.out.println("Welcome "+name);
                 return rs1.getString("role");
             } else {
                 System.out.println("Invalid ID or Password");
-                return "Invalid Student ID or Password";
+                System.out.println();
+                return "null";
             }
 
         } catch (SQLException e) {

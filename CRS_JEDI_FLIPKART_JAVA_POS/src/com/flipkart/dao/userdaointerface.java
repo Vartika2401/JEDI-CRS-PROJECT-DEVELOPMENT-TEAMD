@@ -9,9 +9,11 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
  * Asritha Dama
  * Prajwal Rayal
  **/
-import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.bean.Student;
+
 public interface userdaointerface {
     public int registerstudent();
+    public Boolean checkapproved(int studentID);
+    public String getname(int studentID);
     public String login(int studentID, String password);
     public void changepassword();
 }

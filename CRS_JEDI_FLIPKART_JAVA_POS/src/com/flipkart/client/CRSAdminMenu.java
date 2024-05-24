@@ -75,11 +75,13 @@ public class CRSAdminMenu {
                     break;
                 case 6:
                   System.out.println("Logging Out...");
+                  System.out.println();
                   CRSApplicationClient crsApplicationClient = new CRSApplicationClient();
                   crsApplicationClient.main(null);
                   break;
                 default:
                     System.out.println("Invalid Choice");
+                    System.out.println();
                     break;
             }
         } while (choice != 6);
