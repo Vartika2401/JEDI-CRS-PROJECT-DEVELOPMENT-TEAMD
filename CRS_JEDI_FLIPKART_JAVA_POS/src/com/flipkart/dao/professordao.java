@@ -43,12 +43,20 @@ public class professordao implements professordaointerface{
             ResultSet rs = pstmt.executeQuery();
 //            initialize a list of courses
             List<Integer> courses = new ArrayList<>();
+            List<ArrayList> courseList = new ArrayList<>();
             while (rs.next()) {
-                System.out.print("  Course ID: " + rs.getInt("courseid"));
+                ArrayList<String> course = new ArrayList<>();
+                course.add(Integer.toString(rs.getInt("courseid")));
+                course.add(rs.getString("coursename"));
+                course.add(rs.getString("prereq"));
+                course.add(rs.getString("coursedept"));
+                courseList.add(course);
                 courses.add(rs.getInt("courseid"));
-                System.out.print("  Course Name: " + rs.getString("coursename"));
-                System.out.print("  Prerequisites: " + rs.getString("prereq"));
-                System.out.print("  Course Department: " + rs.getString("coursedept"));
+            }
+            System.out.printf("%10s %20s %20s %20s", "Course ID", "Course Name", "Prerequisites", "Course Department");
+            System.out.println();
+            for (ArrayList<String> course : courseList) {
+                System.out.printf("%10s %20s %20s %20s", course.get(0), course.get(1), course.get(2), course.get(3));
                 System.out.println();
             }
             return courses;
@@ -105,13 +113,11 @@ public class professordao implements professordaointerface{
                     selected_courses.append(course[0]).append(",");
                 }
 
-//                String update_query = "UPDATE prof SET selectedcourses = ? WHERE profid = ?";
                 PreparedStatement pstmt3 = conn.prepareStatement(SQLConstant.UPDATE_PROF_COURSE);
                 pstmt3.setString(1, selected_courses.toString());
                 pstmt3.setInt(2, profid);
                 pstmt3.executeUpdate();
 
-//                String update_query_course = "UPDATE courses SET c_profid = ? WHERE courseid = ?";
                 PreparedStatement pstmt4 = conn.prepareStatement(SQLConstant.UPDATE_CPROF);
                 pstmt4.setInt(1, profid);
                 pstmt4.setInt(2, courseid);
@@ -151,9 +157,9 @@ public class professordao implements professordaointerface{
 //                    Get list of students for course
                     List<Integer> stud = new ArrayList<>();
                     while (rs2.next()) {
-                        String res=rs2.getString("enrolledstud");
+                        String res = rs2.getString("enrolledstud");
 //                        System.out.println(res);
-                        if (rs2.wasNull()){
+                        if (rs2.wasNull()) {
                             System.out.println("    No students enrolled yet for this course");
                             break;
                         }
@@ -161,16 +167,24 @@ public class professordao implements professordaointerface{
                             int studid = Integer.parseInt(id_string);
 //                            String query3 = "SELECT id,name,department FROM user LEFT JOIN student ON user.id=student.studentid WHERE user.id = ?";
                             PreparedStatement pstmt3 = conn.prepareStatement(SQLConstant.GET_ID_NAME);
-                            pstmt3.setInt(1,studid);
+                            pstmt3.setInt(1, studid);
                             ResultSet rs3 = pstmt3.executeQuery();
+                            List<ArrayList> studentList = new ArrayList<>();
                             while (rs3.next()) {
-                                System.out.print("  Student ID: " + rs3.getInt("id"));
-                                System.out.print("  Name: " + rs3.getString("name"));
-                                System.out.print("  Department: " + rs3.getString("department"));
+                                ArrayList<String> student = new ArrayList<>();
+                                student.add(Integer.toString(rs3.getInt("id")));
+                                student.add(rs3.getString("name"));
+                                student.add(rs3.getString("department"));
+                                studentList.add(student);
+                            }
+                            System.out.printf("%10s %20s %20s", "Student ID", "Name", "Department");
+                            System.out.println();
+                            for (ArrayList<String> student : studentList) {
+                                System.out.printf("%10s %20s %20s", student.get(0), student.get(1), student.get(2));
                                 System.out.println();
                             }
+                            System.out.println();
                         }
-                        System.out.println();
                     }
 
                 }

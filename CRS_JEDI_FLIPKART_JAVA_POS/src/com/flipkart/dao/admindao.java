@@ -1,7 +1,9 @@
 package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
 
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.bean.Admin;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant.SQLConstant;
 import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils.DBUtils;
+import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.validator.AdminValidator;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -64,10 +66,8 @@ public class admindao implements admindaointerface{
 //            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 //            check if course already exists
 //            String check_query = "SELECT * FROM courses WHERE courseid = ?";
-            PreparedStatement pstmt_check = conn.prepareStatement(SQLConstant.GET_COURSE_DETAILS);
-            pstmt_check.setInt(1, courseid);
-            ResultSet rs = pstmt_check.executeQuery();
-            if (rs.next()) {
+            AdminValidator adminValidator = new AdminValidator();
+            if (adminValidator.coursealreadyexists(courseid)) {
                 System.out.println("Course already exists in catalog");
                 return;
             }

@@ -15,18 +15,13 @@ public class studentdao implements studentdaointerface {
 
     public void getStudent(int studentid) {
         try {
-//                select rows where studentid = studentid and user id = studentid
-//            String query = "SELECT * FROM student LEFT JOIN user ON student.studentid = user.id WHERE student.studentid = ?";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_STUDENT);
             pstmt.setInt(1, studentid);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                System.out.println("Student ID: " + rs.getInt("studentid"));
-                System.out.println("Student Name: " + rs.getString("name"));
-                System.out.println("Student Contact: " + rs.getString("contact"));
-                System.out.println("Student Email: " + rs.getString("email"));
-                System.out.println("Student Department: " + rs.getString("department"));
-                System.out.println("Student Courses: " + rs.getString("enrolledcourses"));
+//                using string formattor
+                System.out.printf("Student ID: %d\nStudent Name: %s\nStudent Contact: %s\nStudent Email: %s\nStudent Department: %s\nStudent Courses: %s\n",
+                        rs.getInt("studentid"), rs.getString("name"), rs.getString("contact"), rs.getString("email"), rs.getString("department"), rs.getString("enrolledcourses"));
             }
 
 
@@ -37,23 +32,30 @@ public class studentdao implements studentdaointerface {
 
     public List<Integer> showcourses() {
         try {
-//                select rows where studentid = studentid and user id = studentid
-//            take the courses where prof id is not null and get the prof name from prof table
-//            String query = "SELECT profid,courseid,coursename,prereq,coursedept FROM prof LEFT JOIN courses ON courses.c_profid = prof.profid WHERE courses.c_profid IS NOT NULL";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.SHOW_COURSES);
             ResultSet rs = pstmt.executeQuery();
 //            initialize a list of courses
             List<Integer> courses = new ArrayList<>();
+            List<ArrayList> courseList = new ArrayList<>();
+
             while (rs.next()) {
-                System.out.print("Professor ID: " + rs.getInt("profid"));
-                System.out.print("  Course ID: " + rs.getInt("courseid"));
+                ArrayList<String> course = new ArrayList<>();
+                course.add(Integer.toString(rs.getInt("profid")));
+                course.add(Integer.toString(rs.getInt("courseid")));
+                course.add(rs.getString("coursename"));
+                course.add(rs.getString("prereq"));
+                course.add(rs.getString("coursedept"));
+                courseList.add(course);
                 courses.add(rs.getInt("courseid"));
-                System.out.print("  Course Name: " + rs.getString("coursename"));
-                System.out.print("  Prerequisites: " + rs.getString("prereq"));
-                System.out.print("  Course Department: " + rs.getString("coursedept"));
-                System.out.println();
 
             }
+            System.out.printf("%10s %10s %20s %20s %20s", "Professor ID", "Course ID", "Course Name", "Prerequisites", "Course Department");
+            System.out.println();
+            for (ArrayList<String> course : courseList) {
+                System.out.printf("%10s %10s %20s %20s %20s", course.get(0), course.get(1), course.get(2), course.get(3), course.get(4));
+                System.out.println();
+            }
+
             return courses;
 
 
@@ -64,9 +66,6 @@ public class studentdao implements studentdaointerface {
 
     public List<Integer> showEnrolledCourses(int studentID) {
         try {
-//                select rows where studentid = studentid and user id = studentid
-//            take the courses where prof id is not null and get the prof name from prof table
-//            String query= "SELECT enrolledcourses FROM student WHERE studentid = ?";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.SHOW_ENROLLED_COURSES);
             pstmt.setInt(1, studentID);
             ResultSet rs = pstmt.executeQuery();

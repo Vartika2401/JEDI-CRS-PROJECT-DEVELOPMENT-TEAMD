@@ -14,13 +14,9 @@ public class userdao implements userdaointerface {
     @Override
     public int registerstudent() {
         try {
-//            String student_id = "select count(*) from user";
-
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(SQLConstant.USER_COUNT);
-           ;
-            // Extract data from result set
             Integer sid = null;
             while (rs.next()) {
                 sid = rs.getInt("count(*)") + 1;
@@ -71,8 +67,6 @@ public class userdao implements userdaointerface {
             Integer id = scanner.nextInt();
             System.out.println("Enter your current password");
             String pass = scanner.next();
-//          check if this id and password exists in the database
-//            String check_query = "SELECT * FROM user WHERE id = ? AND password = ?";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.CHECK_PASSWORD);
             pstmt.setInt(1, id);
             pstmt.setString(2, pass);
@@ -80,7 +74,6 @@ public class userdao implements userdaointerface {
             if (rs.next()) {
                 System.out.println("Enter your new password");
                 String newpass = scanner.next();
-//                String update_query = "UPDATE user SET password = ? WHERE id = ?";
                 PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.UPDATE_PASSWORD);
                 pstmt1.setString(1, newpass);
                 pstmt1.setInt(2, id);
@@ -101,14 +94,12 @@ public class userdao implements userdaointerface {
 
             Statement stmt = conn.createStatement();
             Integer id = studentID;
-//            String check_query = "SELECT * FROM user WHERE id = ? AND password = ?";
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.CHECK_PASSWORD);
             pstmt.setInt(1, id);
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 System.out.println("Login Successful");
-//                String role_query = "SELECT * FROM user_roles WHERE userid = ?";
                 PreparedStatement pstmt1 = conn.prepareStatement(SQLConstant.GET_USER_ROLE_NAME);
                 pstmt1.setInt(1, id);
                 System.out.println();
