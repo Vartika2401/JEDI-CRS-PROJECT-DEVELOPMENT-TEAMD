@@ -35,4 +35,8 @@ public class SQLConstant {
     public static final String GET_USER_ROLE = "SELECT role FROM user_roles WHERE userid = ?";
     public static final String GET_USER_NAME = "SELECT name FROM user WHERE id = ?";
     public static final String CHECK_COURSE_PROF = "SELECT c_profid FROM courses WHERE courseid = ?";
+    public static final String ENABLE_ADD_DROP = "UPDATE courses SET add_drop_enable = 1";
+    public static final String DISABLE_ADD_DROP = "UPDATE courses SET add_drop_enable = 0";
+    public static final String DECLARE_RESULT = "UPDATE courses SET declare = 1";
+    public static final String STOP_RESULT = "UPDATE courses SET declare = 0";
 }

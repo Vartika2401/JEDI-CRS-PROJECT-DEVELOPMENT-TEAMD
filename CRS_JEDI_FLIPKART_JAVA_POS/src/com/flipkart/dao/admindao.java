@@ -9,13 +9,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class admindao implements admindaointerface{
+public class admindao implements admindaointerface {
     DBUtils db = new DBUtils();
     Connection conn = db.getConnection();
 
+<<<<<<< Updated upstream
     public void  approveregistration(int studid){
 
     }
+=======
+>>>>>>> Stashed changes
     public void approvecourses() {
         try {
 //            String course_id = "select courseid,enrolledstud from courses where approvalstatus= 0";
@@ -27,7 +30,7 @@ public class admindao implements admindaointerface{
                 String enrolled = rs.getString("enrolledstud");
                 List<Integer> enrolledstudents = new ArrayList<>();
 
-                if (!rs.wasNull()){
+                if (!rs.wasNull()) {
                     String[] students = enrolled.split(",");
                     for (String student : students) {
                         enrolledstudents.add(Integer.parseInt(student));
@@ -58,12 +61,12 @@ public class admindao implements admindaointerface{
                     }
                 }
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
     }
+
     public void add_course_to_Catalog(int courseid, String coursename, String prereq, String coursedept) {
         try {
 //            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -86,6 +89,7 @@ public class admindao implements admindaointerface{
             throw new RuntimeException(e);
         }
     }
+
     public void delete_course_input(int courseid) {
         try {
 //            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -98,7 +102,7 @@ public class admindao implements admindaointerface{
                 String enrolled = rs.getString("enrolledstud");
                 List<Integer> enrolledstudents = new ArrayList<>();
 
-                if (!rs.wasNull()){
+                if (!rs.wasNull()) {
                     String[] students = enrolled.split(",");
                     for (String student : students) {
                         enrolledstudents.add(Integer.parseInt(student));
@@ -120,8 +124,7 @@ public class admindao implements admindaointerface{
                 pstmt.executeUpdate();
                 System.out.println("Course deleted from catalog");
                 return;
-            }
-            else{
+            } else {
                 System.out.println("Course does not exist in catalog");
 
             }
@@ -129,6 +132,7 @@ public class admindao implements admindaointerface{
             throw new RuntimeException(e);
         }
     }
+
     public void delete_course_student_count_wrong() {
         try {
 //            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -146,8 +150,8 @@ public class admindao implements admindaointerface{
                     String[] students = enrolled.split(",");
                     for (String student : students) {
                         enrolledstudents.add(Integer.parseInt(student));
-                }}
-                catch (Exception e){
+                    }
+                } catch (Exception e) {
                     System.out.println("Course with ID: " + courseid + " has been deleted");
 //                    String query = "DELETE FROM courses WHERE courseid = ?";
                     PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DELETE_COURSE);
@@ -156,21 +160,21 @@ public class admindao implements admindaointerface{
                     System.out.println("Course deleted from catalog");
                     continue;
                 }
-                    if (enrolledstudents.size() < 3) {
-                        System.out.println("Course with ID: " + courseid + " has less than 3 students");
-                        System.out.println("Course ID: " + courseid);
-                        System.out.println("Enrolled Students: " + enrolledstudents);
-                        studentdao studentdao = new studentdao();
-                        for (int student : enrolledstudents) {
-                            List<Integer> courses = studentdao.showEnrolledCourses(student);
-                            studentdao.deleteCourse(courses,student, courseid);
-                        }
-
-                    } else {
-                        System.out.println("Course with ID: " + courseid + " has more than 10 students");
-                        System.out.println("Course ID: " + courseid);
-                        System.out.println("Enrolled Students: " + enrolledstudents);
+                if (enrolledstudents.size() < 3) {
+                    System.out.println("Course with ID: " + courseid + " has less than 3 students");
+                    System.out.println("Course ID: " + courseid);
+                    System.out.println("Enrolled Students: " + enrolledstudents);
+                    studentdao studentdao = new studentdao();
+                    for (int student : enrolledstudents) {
+                        List<Integer> courses = studentdao.showEnrolledCourses(student);
+                        studentdao.deleteCourse(courses, student, courseid);
                     }
+
+                } else {
+                    System.out.println("Course with ID: " + courseid + " has more than 10 students");
+                    System.out.println("Course ID: " + courseid);
+                    System.out.println("Enrolled Students: " + enrolledstudents);
+                }
 //                String query = "DELETE FROM courses WHERE courseid = ?";
                 PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DELETE_COURSE);
                 pstmt.setInt(1, courseid);
@@ -182,5 +186,49 @@ public class admindao implements admindaointerface{
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void enable_add_drop() {
+        try {
+//            String query = "UPDATE system SET adddrop = 1";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.ENABLE_ADD_DROP);
+            pstmt.executeUpdate();
+            System.out.println("Add Drop enabled");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void disable_add_drop() {
+        try {
+//            String query = "UPDATE system SET adddrop = 0";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DISABLE_ADD_DROP);
+            pstmt.executeUpdate();
+            System.out.println("Add Drop disabled");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void declare_result() {
+        try {
+//            String query = "UPDATE system SET declare = 1";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.DECLARE_RESULT);
+            pstmt.executeUpdate();
+            System.out.println("Result declared");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void stop_result() {
+        try {
+//            String query = "UPDATE system SET declare = 0";
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.STOP_RESULT);
+            pstmt.executeUpdate();
+            System.out.println("Result stopped");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

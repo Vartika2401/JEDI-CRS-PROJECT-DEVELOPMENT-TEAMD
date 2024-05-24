@@ -31,8 +31,11 @@ public class CRSAdminMenu {
             System.out.println("2. Add Courses To Catalog");
             System.out.println("3. Remove Courses From Catalog");
             System.out.println("4. Enable Add/Drop");
-            System.out.println("5. Declare Result");
-            System.out.println("6. Exit");
+            System.out.println("5. Disable Add/Drop");
+            System.out.println("6. Declare Result");
+            System.out.println("7. Stop Result");
+
+            System.out.println("8. Exit");
             System.out.print("\nEnter your choice: ");
 
             choice = scanner.nextInt();
@@ -68,12 +71,20 @@ public class CRSAdminMenu {
                     }
                     break;
                 case 4:
-//                    enableAddDrop();
+                    adminMethods.enableAddDrop();
                     break;
+//                    enableAddDrop();
                 case 5:
-//                    declareResult();
+                    adminMethods.disableAddDrop();
                     break;
                 case 6:
+                    adminMethods.declareResult();
+                    break;
+//                    declareResult();
+                case 7:
+                    adminMethods.stopResult();
+                    break;
+                case 8:
                   System.out.println("Logging Out...");
                   System.out.println();
                   CRSApplicationClient crsApplicationClient = new CRSApplicationClient();

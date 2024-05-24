@@ -15,4 +15,8 @@ public interface AdminInterface {
     public void addCoursesToCatalog(int courseid, String coursename, String prereq, String coursedept);
     public void removeCoursesFromCatalog_inp(int courseid);
     public void removeCoursesFromCatalog_count();
+    public void enableAddDrop();
+    public void declareResult();
+    public void disableAddDrop();
+    public void stopResult();
 }

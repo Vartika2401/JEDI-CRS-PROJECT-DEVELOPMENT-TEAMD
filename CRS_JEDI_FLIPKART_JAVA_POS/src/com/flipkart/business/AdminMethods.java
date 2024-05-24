@@ -33,4 +33,20 @@ public class AdminMethods implements AdminInterface {
         admindao adminDao = new admindao();
         adminDao.delete_course_student_count_wrong();
     }
+    public void enableAddDrop() {
+        admindao adminDao = new admindao();
+        adminDao.enable_add_drop();
+    }
+    public void declareResult() {
+        admindao adminDao = new admindao();
+        adminDao.declare_result();
+    }
+    public void disableAddDrop() {
+        admindao adminDao = new admindao();
+        adminDao.disable_add_drop();
+    }
+    public void stopResult() {
+        admindao adminDao = new admindao();
+        adminDao.stop_result();
+    }
 }

@@ -163,6 +163,10 @@ public class professordao implements professordaointerface{
                     System.out.println();
                     System.out.printf("%10s %20s %20s", "Student ID", "Name", "Department");
 //                    String query2 = "SELECT enrolledstud FROM courses WHERE courses.courseid = ?";
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                     PreparedStatement pstmt2 = conn.prepareStatement(SQLConstant.ENROLLED_STUDENTS_IN_A_COURSE);
                     pstmt2.setInt(1,cid);
                     ResultSet rs2 = pstmt2.executeQuery();
