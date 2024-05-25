@@ -95,8 +95,7 @@ public class CRSAdminMenu {
                 case 9:
                   System.out.println("Logging Out...");
                   System.out.println();
-                  CRSApplicationClient crsApplicationClient = new CRSApplicationClient();
-                  crsApplicationClient.main(null);
+                  CRSApplicationClient.main(null);
                   break;
                 default:
                     System.out.println("Invalid Choice");

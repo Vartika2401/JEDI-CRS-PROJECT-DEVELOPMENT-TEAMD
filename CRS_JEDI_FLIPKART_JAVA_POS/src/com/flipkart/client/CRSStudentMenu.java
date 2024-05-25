@@ -120,8 +120,7 @@ public class CRSStudentMenu {
 	                case 5:
 						System.out.println("Logging Out...");
 						System.out.println();
-						CRSApplicationClient crsApplicationClient = new CRSApplicationClient();
-						crsApplicationClient.main(null);
+						CRSApplicationClient.main(null);
 						break;
 					default:
 						System.out.println("Invalid choice");

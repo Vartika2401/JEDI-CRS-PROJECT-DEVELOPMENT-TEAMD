@@ -104,8 +104,3 @@ public class CRSApplicationClient {
 	}
 
 }
-
-
-// notifications, registration,
-// serives :
-// payments
