@@ -10,6 +10,7 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business;
  * Prajwal Rayal
  **/
 public interface AdminInterface {
+    public void showunapprovedstudents();
     public void  approveregistration(int studid,String password);
     /**
      * Approves the courses.

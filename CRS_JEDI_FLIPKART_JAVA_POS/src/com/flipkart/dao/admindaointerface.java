@@ -12,7 +12,7 @@ package CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao;
  **/
 
 public interface admindaointerface {
-
+    public void showunapprovedstudents();
     /**
      * Approves the registration of a student.
      * @param studid The ID of the student

@@ -42,6 +42,8 @@ public class CRSAdminMenu {
             AdminMethods adminMethods = new AdminMethods();
             switch (choice) {
                 case 1:
+                    System.out.println("ALL UNAPPROVED USERS:");
+                    adminMethods.showunapprovedstudents();
                     System.out.println("Approving User Registration");
                     System.out.println("Enter user ID to approve: ");
                     int studentID = scanner.nextInt();

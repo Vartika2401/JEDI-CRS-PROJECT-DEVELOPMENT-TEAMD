@@ -15,12 +15,16 @@ import CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao.admindao;
  **/
 
 public class AdminMethods implements AdminInterface {
-
+    public void showunapprovedstudents(){
+        admindao adminDao = new admindao();
+        adminDao.showunapprovedstudents();
+    }
     /**
      * Approves the registration of a student.
      * @param studid The ID of the student
      * @param password The password for the student's account
      */
+
     public void approveregistration(int studid, String password) {
         admindao adminDao = new admindao();
         adminDao.approveregistration(studid, password);

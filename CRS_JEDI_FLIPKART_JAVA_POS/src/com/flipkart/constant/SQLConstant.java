@@ -42,4 +42,5 @@ public class SQLConstant {
     public static final String GET_USER = "SELECT * FROM user WHERE id = ? and password = ?";
     public static final String CHECK_USER = "SELECT approval FROM user WHERE id = ?";
     public static final String APPROVE_REGISTRATION = "UPDATE user SET approval = 1 WHERE id = ?";
+    public static final String GET_UNAPPROVED_STUDENTS = "SELECT * FROM user WHERE approval = 0";
 }

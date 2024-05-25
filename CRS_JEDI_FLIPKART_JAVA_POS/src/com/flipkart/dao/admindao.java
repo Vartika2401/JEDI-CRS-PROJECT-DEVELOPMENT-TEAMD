@@ -18,8 +18,35 @@ public class admindao implements admindaointerface {
      * @param studid The ID of the student
      * @param pass The password of the student
      */
+
+    public void showunapprovedstudents(){
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_UNAPPROVED_STUDENTS);
+            ResultSet rs = pstmt.executeQuery();
+            List<ArrayList> studentList = new ArrayList<>();
+            while (rs.next()) {
+                ArrayList<String> student = new ArrayList<>();
+                student.add(rs.getString("id"));
+                student.add(rs.getString("name"));
+                student.add(rs.getString("contact"));
+                student.add(rs.getString("email"));
+                studentList.add(student);
+            }
+            System.out.printf("%10s %20s %20s %20s ", "User ID", "Name", "Contact", "Email");
+            System.out.println();
+            for (ArrayList<String> student : studentList) {
+                System.out.printf("%10s %20s %20s %20s", student.get(0), student.get(1), student.get(2), student.get(3));
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public void approveregistration(int studid, String pass) {
         try {
+
             PreparedStatement pstmt = conn.prepareStatement(SQLConstant.GET_USER);
             pstmt.setInt(1, studid);
             pstmt.setString(2, pass);
