@@ -1,0 +1,9 @@
+module:CRS_JEDI_FLIPKART_JAVA_POS
+CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.bean
+CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.business
+CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.client
+CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.constant
+CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.dao
+CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.exception
+CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.utils
+CRS_JEDI_FLIPKART_JAVA_POS.src.com.flipkart.validator
